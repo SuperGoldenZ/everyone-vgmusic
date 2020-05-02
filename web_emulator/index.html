@@ -3,12 +3,38 @@
 		<title>Everyone: VG Music (web emulator)</title>
 		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
 		<script src = "midi.js"></script>
+		<script src = "keyboard.js"></script>
 		<script src = "megaman2.js"></script>
 		<script src = "everyoneConsole.js"></script>
 		<script src = "everyoneEmulator.js"></script>
 		<link rel="stylesheet" type="text/css" href="everyoneConsole.css">
 	</head>
 	<body>
+	    <div class="midi_interfaces">
+        MIDI<br />
+        <table>
+            <tr>
+                <td>
+                    Out:
+                </td>
+                <td>
+                    <select id="midi_outputs">
+                        <option value = "0">jsSynth</option>
+                    </select><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    In:
+                </td>
+                <td>
+                    <select id="midi_inputs">
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
 		<div id = "console">
 			C:\EVERYONE\>
 		</div>

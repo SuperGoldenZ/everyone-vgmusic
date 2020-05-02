@@ -12,6 +12,12 @@
             $(this).addClass('everyoneConsole');
             let base = this;
 
+            $(document).keyup(function(ev) {
+                if (base.activeSong != null) {
+                    base.activeSong.keyup(ev);
+                    return;
+                }            	
+            });
 
             $(document).keydown(function(ev) {
                 let commandFound = false;

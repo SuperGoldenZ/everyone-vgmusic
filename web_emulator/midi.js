@@ -88,9 +88,48 @@ let midi = {
     A6: 105,
     AS6: 106,
     B6: 107,
-    C7: 108
+    C7: 108,
 
+    midiOut: null,
+    play_note: function(channel, note, velocity) {
+      console.log("play note: " + channel + ", " + note + ", " + velocity);
+        if (note == 0) return 0;
+        channel--;
+        if ((channel >= 0) && (channel <= 15)) {
+            let message = [];
+            message[0] = 0x90;
+            message[0] += channel;
+            message[1] = note;
+            message[2] = velocity;
+            if (this.midiOut == null) {
+              console.log("midiOut is null");
+              return -1;
+            }
+            this.midiOut.send(message);
+        }
+        return 1;
+    },
 
+    kill_note: function(channel, note, velocity) {
+      console.log("kill note: " + channel + ", " + note + ", " + velocity);
+        if (note == 0) return 0;
+        channel--;
+        if ((channel >= 0) && (channel <= 15)) {
+            let message = [];
+            message[0] = 0x80;
+            message[0] += channel;
+            message[1] = note;
+            message[2] = velocity;
 
+            if (this.midiOut == null) {
+              console.log("midiOut is null");
+              return -1;
+            }
+
+            this.midiOut.send(message);
+
+        }
+        return 1;
+    }
 
 };
