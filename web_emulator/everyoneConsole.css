@@ -26,3 +26,12 @@ body {
 	background-color: black;
 	color: white;
 }
+
+.stage {
+	background-image: url("./background.jpg");
+	min-width: 60em;
+	min-height: 25em;
+	background-size: 100% 100%;
+	display: absolute;
+	float: left;
+}
