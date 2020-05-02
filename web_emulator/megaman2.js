@@ -7,9 +7,13 @@ let megaman2 = {
     drumbassnotes: [],
     onDone: null,
     midiOut: null,
-
+    cleanBassChannel: 3,
+    drumChannel: 10,
+    state: "menu",
+    flutechannel : 5,
     main: function() {
         var index;
+        this.state = "menu";
         for (index = 0; index < 127; index++)
             this.notes[index] = 0;
 
@@ -149,15 +153,35 @@ let megaman2 = {
         for (index = 0; index < 8; index++)
             this.drumbassnotes[37][index] = midi.C2;
 
+        this.generalMidiSetup();
         this.menu();
     },
+
+    generalMidiSetup: function() {
+        midi.program_change(this.cleanBassChannel, 36);
+        //midi.program_change(this.drumChannel, 127);
+    },
+
     keydown: function(ev) {
-        if (ev.keyCode == 27) {
-            this.done();
-            return;
+	            if (ev.keyCode == 27) {
+                this.done();
+                return;
+            }
+
+        if (this.state == "menu") {
+
+            if (ev.keyCode == keyboard.INDEX_1) {
+                this.go();
+                this.state = "intro";
+                return;
+            }
+
+            
         }
 
-        this.dobass(ev);
+        if (this.state == "intro" || this.state == "menu") {
+        	this.dobass(ev);
+        }
     },
     keyup: function(ev) {
         this.dobass(ev);
@@ -174,22 +198,27 @@ let megaman2 = {
         $(".everyoneConsole").html("");
         $(".everyoneConsole").append("Mega Man 2<br/>");
         $(".everyoneConsole").append("Press ESC to quit...");
-        $(".everyoneConsole").append("<br/>F1: Start the intro");
-        $(".everyoneConsole").append("<br/>F2: Flashman");
-        $(".everyoneConsole").append("<br/>F3: Dr. Wily's Castle");
+        $(".everyoneConsole").append("<br/>1: Start the intro");
+        $(".everyoneConsole").append("<br/>2: Flashman");
+        $(".everyoneConsole").append("<br/>3: Dr. Wily's Castle");
     },
-
-    dobass: function(ev) {        
+    clrscr: function () {
+		$(".everyoneConsole").html("");
+    },
+    cout : function (txt) {
+		$(".everyoneConsole").append(txt);
+    },
+    dobass: function(ev) {
         if (ev.type == "keydown") {
             console.log("keydown");
 
             if ((this.notes[keyboard.INDEX_SPACE] == 0) && (ev.keyCode == keyboard.INDEX_SPACE)) {
                 this.notes[keyboard.INDEX_SPACE] = 1;
-                midi.play_note(3, 42, 127);
+                midi.play_note(this.cleanBassChannel, 42, 127);
             }
         } else if (ev.type == "keyup") {
             if ((this.notes[keyboard.INDEX_SPACE] == 1) && (ev.keyCode == keyboard.INDEX_SPACE)) {
-                midi.kill_note(3, 42, 127);
+                midi.kill_note(this.cleanBassChannel, 42, 127);
                 this.notes[keyboard.INDEX_SPACE] = 0;
             }
         }
@@ -328,6 +357,472 @@ let megaman2 = {
         //   kill_note(3,45,127);   
         //   this.notes[keyboard.INDEX_CTRL]=0;   
         // }   
+    },
 
-    }
+    //***
+    go: async function ()
+    {
+     let = nspeed = 135;
+     this.clrscr();   
+
+     // change_program(2,9,0); //tinestring
+     // change_effects_channel(8);
+     // all_lights_off(0);
+     // change_light_level(2,127);
+     // change_light_level(4,50);
+
+     let measure = 1;
+     this.cout("Playing Mega Man 2 intro...");   
+     let flutelevel = 127;   
+
+     this.cout("<br/>Measure " + measure++);
+     midi.play_note(this.flutechannel,82,flutelevel);   
+     
+     this.cout(" 1 ");
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);
+     this.cout(" 2 ");
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     this.cout(" 3 ");
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     this.cout(" 4 ");
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+
+     midi.kill_note(this.flutechannel,82,flutelevel);
+   
+     //Measure 2   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,83,flutelevel);   
+     this.cout(" 1 " );
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     this.cout(" 2 " );
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     this.cout(" 3 " );
+     await this.delay2(nspeed);
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     this.cout(" 4 " );
+     midi.kill_note(this.flutechannel,83,flutelevel);
+   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     await this.delay2(nspeed);   
+     midi.kill_note(this.flutechannel,85,flutelevel);
+   
+     //Measure 3   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,82,flutelevel);   
+     this.cout(" 1 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 2 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 3 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 4 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+
+     kill_note(this.flutechannel,82,flutelevel);
+   
+     //Measure 4   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,83,flutelevel);   
+     this.cout(" 1 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 2 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 3 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 4 " );
+     kill_note(this.flutechannel,83,flutelevel);
+   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,85,flutelevel);
+   
+     //Measure 5   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,82,flutelevel);   
+     this.cout(" 1 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,82,flutelevel);
+   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     this.cout(" 2 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,85,flutelevel);
+   
+     midi.play_note(this.flutechannel,92,flutelevel);   
+     this.cout(" 3 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,92,flutelevel);
+   
+     this.cout(" 4 " );
+     midi.play_note(this.flutechannel,89,flutelevel);
+     delay2(nspeed);
+     delay2(nspeed);   
+     kill_note(this.flutechannel,89,flutelevel);
+   
+     midi.play_note(this.flutechannel,90,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);      
+
+     //Measure 6
+     this.cout("<br/>Measure " + measure++);   
+     this.cout(" 1 " );
+     delay2(nspeed);
+     delay2(nspeed);   
+     kill_note(this.flutechannel,90,flutelevel);
+   
+     delay2(nspeed);        
+     delay2(nspeed);           
+     this.cout(" 2 " );
+     delay2(nspeed);
+     delay2(nspeed);        
+
+     midi.play_note(this.flutechannel,90,flutelevel);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 3 " );
+     kill_note(this.flutechannel,90,flutelevel);
+        
+     midi.play_note(this.flutechannel,89,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,89,flutelevel);
+   
+     midi.play_note(this.flutechannel,87,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,87,flutelevel);
+     this.cout(" 4 " );   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,85,flutelevel);
+        
+     midi.play_note(this.flutechannel,87,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,87,flutelevel);
+   
+     //Measure 7   
+     this.cout("<br/>Measure " + measure++);   
+     this.cout(" 1 " );   
+     delay2(nspeed);
+     delay2(nspeed);      
+     midi.play_note(this.flutechannel,82,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,82,flutelevel);
+     this.cout(" 2 " );      
+     midi.play_note(this.flutechannel,80,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,80,flutelevel);
+   
+     midi.play_note(this.flutechannel,78,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 3 " );   
+     delay2(nspeed);
+     kill_note(this.flutechannel,78,flutelevel);
+   
+     delay2(nspeed);   
+   
+     midi.play_note(this.flutechannel,78,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,78,flutelevel);
+     this.cout(" 4 " );      
+     midi.play_note(this.flutechannel,77,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,77,flutelevel);
+   
+     midi.play_note(this.flutechannel,78,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,78,flutelevel);
+   
+     //Measure 8   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     this.cout(" 1 " );      
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 2 " );      
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 3 " );      
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     this.cout(" 4 " );      
+     delay2(nspeed);
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+
+     kill_note(this.flutechannel,85,flutelevel);
+   
+     //Measure 9   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,87,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,87,flutelevel);
+   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,85,flutelevel);   
+   
+     midi.play_note(this.flutechannel,83,flutelevel);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     delay2(nspeed);   
+     kill_note(this.flutechannel,83,flutelevel);
+   
+     //Measure 10   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,89,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,89,flutelevel);   
+   
+     midi.play_note(this.flutechannel,87,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,87,flutelevel);   
+   
+     midi.play_note(this.flutechannel,85,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,85,flutelevel);   
+   
+     //Measure 11   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,89,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,89,flutelevel);   
+   
+     midi.play_note(this.flutechannel,87,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,87,flutelevel);   
+   
+     midi.play_note(this.flutechannel,86,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,86,flutelevel);   
+   
+     //Measure 12   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,90,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,90,flutelevel);   
+   
+     midi.play_note(this.flutechannel,89,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,89,flutelevel);   
+   
+     midi.play_note(this.flutechannel,87,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,87,flutelevel);   
+   
+     //Measure 13   
+     this.cout("<br/>Measure " + measure++);   
+     midi.play_note(this.flutechannel,90,flutelevel);   
+     delay2(nspeed*9);   
+     kill_note(this.flutechannel,90,flutelevel);   
+   
+     nspeed = 110;   
+     midi.play_note(this.flutechannel,A4,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,A4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,CS5,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,CS5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,D5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,D5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,D5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,CS5,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,CS5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,D5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*10);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,GS4,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,GS4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,E5,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,E5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,D5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,CS5,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,CS5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*4);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,C5,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,C5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,C5,flutelevel);   
+     delay2(nspeed*1);   
+     kill_note(this.flutechannel,C5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,C5,flutelevel);   
+     delay2(nspeed*1);   
+     kill_note(this.flutechannel,C5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,C5,flutelevel);   
+     delay2(nspeed*3);   
+     kill_note(this.flutechannel,C5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*3);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,C5,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,C5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,A4,flutelevel);   
+     delay2(nspeed*6);   
+     kill_note(this.flutechannel,A4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,A4,flutelevel);   
+     delay2(nspeed*1);   
+     kill_note(this.flutechannel,A4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,A4,flutelevel);   
+     delay2(nspeed*1);   
+     kill_note(this.flutechannel,A4,flutelevel);   
+   
+     delay2(nspeed*1);   
+   
+     midi.play_note(this.flutechannel,A4,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,A4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,B4,flutelevel);   
+     delay2(nspeed*3);   
+     kill_note(this.flutechannel,B4,flutelevel);   
+   
+     midi.play_note(this.flutechannel,C5,flutelevel);   
+     delay2(nspeed*2);   
+     kill_note(this.flutechannel,C5,flutelevel);   
+   
+     midi.play_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*16);   
+     kill_note(this.flutechannel,D5,flutelevel);   
+     delay2(nspeed*2);
+     this.cout("<br/>LET GO");
+     drums(92);
+    },
+
+    delay2:function(ms) {
+  		return new Promise(resolve => setTimeout(resolve, ms));
+  	} 
+    
 };

@@ -6,4 +6,23 @@
 	max-height: 15em;	
 	display: flex;
 	flex-direction: column-reverse;
+	
+
+	border-color: #b8bcc2;
+	border-width: 0.25em;
+	border-style: solid;
+	overflow: hidden;
+	position: fixed;
+	bottom: 1em;
+	width: 60em;
+}
+
+.midi_interfaces {
+    float: right;
+    display: block;
+}
+
+body {
+	background-color: black;
+	color: white;
 }

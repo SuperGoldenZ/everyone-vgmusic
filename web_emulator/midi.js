@@ -105,6 +105,7 @@ let midi = {
               console.log("midiOut is null");
               return -1;
             }
+            console.log(message);
             this.midiOut.send(message);
         }
         return 1;
@@ -130,6 +131,12 @@ let midi = {
 
         }
         return 1;
-    }
+    },
 
+    program_change:function (channel, programNumber) {
+      channel--;
+      if (this.midiOut != null) {
+        this.midiOut.send([0xC0 + channel, programNumber]);
+      }
+    }
 };

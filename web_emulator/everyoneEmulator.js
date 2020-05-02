@@ -27,7 +27,7 @@ function onMidiAccess(access) {
     const outputs = access.outputs.values();
     var i = 1;
 
-    //midi_outputs.push($(jsRapPiano)[0].jsSynth);
+    midi_outputs.push(null);
     out = midi_outputs[0];
 
     for (var output of access.outputs.values()) {
@@ -63,6 +63,8 @@ function onMidiInputChange(ev) {
 function onMidiOutputChange(ev) {
     var selectedMidiOutput = $("#midi_outputs").children("option:selected").val();
     midi.midiOut = midi_outputs[selectedMidiOutput];
-    console.log("set midi out");
+    console.log("set midi out " + selectedMidiOutput);
     console.log(midi_outputs);
+
+    //megaman2.cleanBassChannel = 36;
 }
