@@ -1,0 +1,9 @@
+.everyoneConsole {
+	background-color: black;
+	color: white;
+	font: 1.3rem Inconsolata, monospace;
+	min-height: 15em;
+	max-height: 15em;	
+	display: flex;
+	flex-direction: column-reverse;
+}
