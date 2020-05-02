@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	everyoneConsole = $('#console').everyoneConsole();
+	everyoneConsole = $('#console').everyoneConsole([megaman2]);
 	/*
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
     jsRapPiano = $('#pianoInput').jsRapPiano({
