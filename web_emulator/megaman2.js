@@ -12,6 +12,7 @@ let megaman2 = {
     state: "menu",
     chordchannel: 4,
     flutechannel: 5,
+    counterchannel: 6,
     base: null,
     main: function() {
         var index;
@@ -156,19 +157,25 @@ let megaman2 = {
         for (index = 0; index < 8; index++)
             this.drumbassnotes[37][index] = midi.C2;
 
+        $(".score").fadeIn(500);
         this.generalMidiSetup();
-        this.menu();
+        this.menu();    
     },
 
     generalMidiSetup: function() {
         midi.program_change(this.basschannel, 36);
         midi.program_change(this.flutechannel, 74);
         midi.program_change(this.chordchannel, 51);
+        midi.program_change(this.counterchannel, 81);
     },
 
     keydown: function(ev) {
         if (ev.keyCode == 27) {
-            this.done();
+            if (this.state == "wily") {
+                this.state = "done_wily";
+            } else {
+                this.done();
+            }
             return;
         }
 
@@ -178,6 +185,10 @@ let megaman2 = {
                 //this.drums(92);
                 this.state = "intro";
                 return;
+            } else if (ev.keyCode == keyboard.INDEX_3) {
+                this.wilys_castle(85);
+                this.state = "wily";
+                return;
             }
         }
 
@@ -185,19 +196,24 @@ let megaman2 = {
             this.dobass(ev);
         } else if (this.state == "drums") {
             this.dostuff(ev);
+        } else if (this.state == "wily") {
+            this.doskull(ev);
         }
     },
     keyup: function(ev) {
         if (this.state == "intro" || this.state == "menu") {
             this.dobass(ev);
         } else if (this.state == "drums") {
-           this.dostuff(ev);   
+            this.dostuff(ev);
+        } else if (this.state == "wily") {
+            this.doskull(ev);
         }
     },
     done: function() {
         $(".everyoneConsole").html("");
         $(".everyoneConsole").append("Hope Mega Man went well!");
         this.state = "done";
+        $(".score").fadeOut(500);
         if (this.onDone != null) {
             this.onDone();
         }
@@ -209,30 +225,32 @@ let megaman2 = {
         $(".everyoneConsole").append("Press ESC to quit...");
         $(".everyoneConsole").append("<br/>1: Start the intro");
         //$(".everyoneConsole").append("<br/>2: Flashman");
-        //$(".everyoneConsole").append("<br/>3: Dr. Wily's Castle");
+        $(".everyoneConsole").append("<br/>3: Dr. Wily's Castle");
     },
     clrscr: function() {
         $(".everyoneConsole").html("");
     },
-    cout: function(txt) {       
-        $(".everyoneConsole").append(txt);        
+    cout: function(txt) {
+        $(".everyoneConsole").append(txt);
     },
     dobass: function(ev) {
 
         let mapping = [];
-        mapping[keyboard.INDEX_SPACE] = 42;
-        mapping[keyboard.INDEX_UP] = 41;
-        mapping[keyboard.INDEX_RIGHT] = 39;
-        mapping[keyboard.INDEX_Y] = 38;
-        mapping[keyboard.INDEX_DOWN] = 37;
-        mapping[keyboard.INDEX_LEFT] = 36;
-        mapping[keyboard.INDEX_N] = 35;
-        mapping[keyboard.INDEX_I] = 34;
-        mapping[keyboard.INDEX_Q] = 33;
-        mapping[keyboard.INDEX_ENTER] = 39;
-        mapping[keyboard.INDEX_D] = 44;
-        mapping[keyboard.INDEX_V] = 40;
-        mapping[keyboard.INDEX_CTRL] = 45;
+        mapping[keyboard.INDEX_SPACE] = midi.FS1;
+        mapping[keyboard.INDEX_UP] = midi.F1;
+        mapping[keyboard.INDEX_RIGHT] = midi.DS1;
+        mapping[keyboard.INDEX_DOWN] = midi.CS1;
+        mapping[keyboard.INDEX_LEFT] = midi.C1;
+        mapping[keyboard.INDEX_N] = midi.B0;
+        mapping[keyboard.INDEX_Q] = midi.AS0;
+        mapping[keyboard.INDEX_D] = midi.A0;
+        mapping[keyboard.INDEX_Y] = midi.D1;
+        mapping[keyboard.INDEX_V] = midi.E1;
+        mapping[keyboard.INDEX_ENTER] = midi.GS1;
+        mapping[keyboard.INDEX_CTRL] = midi.A1;
+
+        //mapping[keyboard.INDEX_I] = 34;
+        
 
         if (ev.type == "keydown") {
             console.log("keydown");
@@ -1415,7 +1433,162 @@ let megaman2 = {
                 }
             });
         }
+    },
 
+    wilys_castle: async function(speed) {
+        this.clrscr();
+        this.cout("Dr. Wily's castle!");
+        this.cout("<br/>Press ESC to quit");
+        let measure = -1;
 
+        midi.change_volume(2, 99);
+        //change_program(2,98,2); //screamer!   
+
+        //Intro drums
+        midi.play_note(10, 36, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 36, 127);
+
+        midi.play_note(10, 38, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 38, 127);
+
+        midi.play_note(10, 36, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 36, 127);
+
+        midi.play_note(10, 38, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 38, 127);
+
+        midi.play_note(10, 36, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 36, 127);
+
+        midi.play_note(10, 38, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 38, 127);
+
+        midi.play_note(10, 36, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 36, 127);
+
+        midi.play_note(10, 38, 127);
+        await this.delay1(speed * 4);
+        midi.kill_note(10, 38, 127);
+
+        measure = -1;
+        //change_light_level(1,50);
+        //change_light_level(2,75);
+        //change_light_level(3,25);
+        //change_light_level(4,50);
+
+        while (1) {
+
+            if (measure == 55) {
+                measure = -1;
+            }
+
+            if (measure == 22)
+                midi.change_volume(2, 85);
+
+            if (measure == 39)
+                midi.change_volume(2, 99);
+
+            this.cout("<br/>Measure " + ((++measure) + 1));
+            midi.play_note(10, 36, 127);
+
+            midi.play_note(this.basschannel, this.bassnotes[measure][0], 127);
+            await this.delay1(speed);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][0], 127);
+
+            midi.play_note(this.basschannel, this.bassnotes[measure][1], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][1], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][2], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][2], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][3], 127);
+            midi.kill_note(10, 36, 127);
+            midi.play_note(10, 38, 127);
+            await this.delay1(speed);
+            await this.delay1(speed);
+
+            midi.kill_note(this.basschannel, this.bassnotes[measure][3], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][4], 127);
+
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][4], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][5], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][5], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][6], 127);
+
+            midi.kill_note(10, 38, 127);
+            midi.play_note(10, 36, 127);
+            await this.delay1(speed);
+            await this.delay1(speed);
+
+            midi.kill_note(this.basschannel, this.bassnotes[measure][6], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][7], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][7], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][8], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][8], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][9], 127);
+
+            midi.kill_note(10, 36, 127);
+            midi.play_note(10, 38, 127);
+
+            await this.delay1(speed);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][9], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][10], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][10], 127);
+            midi.play_note(this.basschannel, this.bassnotes[measure][11], 127);
+            await this.delay1(speed);
+            midi.kill_note(this.basschannel, this.bassnotes[measure][11], 127);
+            midi.kill_note(10, 38, 127);
+
+            if (this.state == "done_wily") {
+                break;
+            }
+        }
+
+        this.menu();
+    },
+
+    doskull: function(ev) {
+        let mapping = [];
+        mapping[keyboard.INDEX_R] = midi.CS5;
+        mapping[keyboard.INDEX_A] = midi.E5;
+        mapping[keyboard.INDEX_Y] = midi.GS5;
+        mapping[keyboard.INDEX_Q] = midi.FS5;
+        mapping[keyboard.INDEX_V] = midi.DS5;
+        mapping[keyboard.INDEX_DOWN] = midi.GS4;
+        mapping[keyboard.INDEX_ENTER] = midi.DS4;
+        mapping[keyboard.INDEX_LEFT] = midi.FS4;
+        mapping[keyboard.INDEX_RIGHT] = midi.B4;
+        mapping[keyboard.INDEX_UP] = midi.A4;
+        mapping[keyboard.INDEX_SPACE] = midi.E4;
+
+        if (ev.type == "keydown") {                  
+            mapping.forEach(function(item, index) {
+                if ((base.notes[index] == 0) && (ev.keyCode == index)) {
+                    base.notes[index] = 1;
+                    midi.play_note(base.counterchannel, item, 127);
+                }
+            });
+        } else if (ev.type == "keyup") {            
+            mapping.forEach(function(item, index) {
+                if ((base.notes[index] == 1) && (ev.keyCode == index)) {
+                    base.notes[index] = 0;
+                    midi.kill_note(base.counterchannel, item, 127);
+                }
+            });
+        }
     }
 };

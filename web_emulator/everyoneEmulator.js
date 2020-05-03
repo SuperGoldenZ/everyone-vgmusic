@@ -27,9 +27,9 @@ function onMidiAccess(access) {
     const outputs = access.outputs.values();
     var i = 1;
 
-    midi_outputs.push(null);
+    midi_outputs.push(everyoneSynth);
     out = midi_outputs[0];
-
+    midi.midiOut = out;
     for (var output of access.outputs.values()) {
         midi_outputs.push(output);
         if (out == null) {

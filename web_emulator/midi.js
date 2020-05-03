@@ -92,7 +92,7 @@ let midi = {
 
     midiOut: null,
     play_note: function(channel, note, velocity) {
-      console.log("play note: " + channel + ", " + note + ", " + velocity);
+        //console.log("play note: " + channel + ", " + note + ", " + velocity);
         if (note == 0) return 0;
         channel--;
         if ((channel >= 0) && (channel <= 15)) {
@@ -102,17 +102,17 @@ let midi = {
             message[1] = note;
             message[2] = velocity;
             if (this.midiOut == null) {
-              console.log("midiOut is null");
-              return -1;
+                console.log("midiOut is null");
+                return -1;
             }
-            console.log(message);
+            //console.log(message);
             this.midiOut.send(message);
         }
         return 1;
     },
 
     kill_note: function(channel, note, velocity) {
-      console.log("kill note: " + channel + ", " + note + ", " + velocity);
+        //console.log("kill note: " + channel + ", " + note + ", " + velocity);
         if (note == 0) return 0;
         channel--;
         if ((channel >= 0) && (channel <= 15)) {
@@ -123,8 +123,8 @@ let midi = {
             message[2] = velocity;
 
             if (this.midiOut == null) {
-              console.log("midiOut is null");
-              return -1;
+                console.log("midiOut is null");
+                return -1;
             }
 
             this.midiOut.send(message);
@@ -133,10 +133,35 @@ let midi = {
         return 1;
     },
 
-    program_change:function (channel, programNumber) {
-      channel--;
-      if (this.midiOut != null) {
-        this.midiOut.send([0xC0 + channel, programNumber-1]);
-      }
+    program_change: function(channel, programNumber) {
+        channel--;
+        if (this.midiOut != null) {
+            this.midiOut.send([0xC0 + channel, programNumber - 1]);
+        }
+    },
+
+    change_volume: function(channel, newvolume) {
+        //not implemented yet
+        return;
+        if (newvolume < 0)
+            return;
+        channel--;
+        let message= [];
+        message[0] = 0xF0;
+        message[1] = 0x00;
+        message[2] = 0x00;
+        message[3] = 0x0E;
+        message[4] = 0x0E;
+        message[5] = 0x10; //?
+        message[6] = 33; //0mmfffff 
+        message[7] = 0; //0ssppppp
+        message[8] = 0; //0ccccddv channel
+        message[8] += channel * 8;
+        message[9] = newvolume; //vvvvvvvv 
+        message[10] = 0; //vvvvvvvv
+        message[11] = 0xF7;
+        if (this.midiOut != null) {
+            this.midiOut.send(message);
+        }
     }
 };

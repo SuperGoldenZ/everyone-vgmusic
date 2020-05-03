@@ -2,7 +2,7 @@
 	background-color: black;
 	color: white;
 	font: 1.3rem Inconsolata, monospace;
-	min-height: 15em;
+	min-height: 18em;
 	max-height: 15em;	
 	display: flex;
 	flex-direction: column-reverse;
@@ -14,12 +14,16 @@
 	overflow: hidden;
 	position: fixed;
 	bottom: 1em;
-	width: 60em;
+	min-width: 50em;
+	max-width: 50em;
 }
 
 .midi_interfaces {
     float: right;
-    display: block;
+    display: absolute;
+    position: fixed;
+    top: 5em;
+    right: 5em;
 }
 
 body {
@@ -29,9 +33,20 @@ body {
 
 .stage {
 	background-image: url("./background.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
 	min-width: 60em;
-	min-height: 25em;
-	background-size: 100% 100%;
-	display: absolute;
-	float: left;
+	min-height: 25em;		
+	margin-left: 40em;
+	margin-right: auto;
+}
+
+.score {
+	background-image: url("./megaman2_intro_bass_notes.jpg");
+	min-width: 707px;
+	min-height: 399px;
+	position: fixed;
+	bottom: 1em;
+	right: 1em;
+	display: none;
 }

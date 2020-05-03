@@ -5,10 +5,6 @@
             this.songs = songs;
             this.activeSong = null;
 
-            $("#target").keydown(function() {
-                alert("Handler for .keydown() called.");
-            });
-
             $(this).addClass('everyoneConsole');
             let base = this;
 
@@ -20,7 +16,8 @@
             });
 
             $(document).keydown(function(ev) {
-                console.log(ev);
+                everyoneSynth.InitSynth();
+
                 let commandFound = false;
                 if (base.activeSong != null) {
                     base.activeSong.keydown(ev);
