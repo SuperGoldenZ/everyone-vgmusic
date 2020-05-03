@@ -20,6 +20,7 @@
             });
 
             $(document).keydown(function(ev) {
+                console.log(ev);
                 let commandFound = false;
                 if (base.activeSong != null) {
                     base.activeSong.keydown(ev);

@@ -10,6 +10,7 @@ let megaman2 = {
     basschannel: 3,
     drumchannel: 10,
     state: "menu",
+    chordchannel: 4,
     flutechannel: 5,
     base: null,
     main: function() {
@@ -162,6 +163,7 @@ let megaman2 = {
     generalMidiSetup: function() {
         midi.program_change(this.basschannel, 36);
         midi.program_change(this.flutechannel, 74);
+        midi.program_change(this.chordchannel, 51);
     },
 
     keydown: function(ev) {
@@ -173,6 +175,7 @@ let megaman2 = {
         if (this.state == "menu") {
             if (ev.keyCode == keyboard.INDEX_1) {
                 this.go(92);
+                //this.drums(92);
                 this.state = "intro";
                 return;
             }
@@ -180,14 +183,21 @@ let megaman2 = {
 
         if (this.state == "intro" || this.state == "menu") {
             this.dobass(ev);
+        } else if (this.state == "drums") {
+            this.dostuff(ev);
         }
     },
     keyup: function(ev) {
-        this.dobass(ev);
+        if (this.state == "intro" || this.state == "menu") {
+            this.dobass(ev);
+        } else if (this.state == "drums") {
+           this.dostuff(ev);   
+        }
     },
     done: function() {
         $(".everyoneConsole").html("");
         $(".everyoneConsole").append("Hope Mega Man went well!");
+        this.state = "done";
         if (this.onDone != null) {
             this.onDone();
         }
@@ -204,8 +214,8 @@ let megaman2 = {
     clrscr: function() {
         $(".everyoneConsole").html("");
     },
-    cout: function(txt) {
-        $(".everyoneConsole").append(txt);
+    cout: function(txt) {       
+        $(".everyoneConsole").append(txt);        
     },
     dobass: function(ev) {
 
@@ -706,6 +716,7 @@ let megaman2 = {
 
     //DRUMS!   
     drums: async function(speed) {
+        this.state = "drums";
         this.clrscr();
         let basslevel = 127;
         this.cout("Drum mode activated!");
@@ -1365,9 +1376,46 @@ let megaman2 = {
     },
     //END DRUMS    
     delay2: function(ms) {
+        if (this.state == "done") {
+            ms = 0;
+        }
         return new Promise(resolve => setTimeout(resolve, ms));
     },
     delay1: function(ms) {
+        if (this.state == "done") {
+            ms = 0;
+        }
         return new Promise(resolve => setTimeout(resolve, ms));
+    },
+
+    dostuff: function(ev) {
+        let chords = [];
+        chords[keyboard.INDEX_1] = [72, 67, 63, 60];
+        chords[keyboard.INDEX_2] = [70, 65, 62, 58];
+        chords[keyboard.INDEX_3] = [68, 63, 60, 56];
+        chords[keyboard.INDEX_4] = [67, 62, 59, 55];
+        chords[keyboard.INDEX_5] = [72, 67, 64, 60];
+
+        if (ev.type == "keydown") {
+            chords.forEach(function(item, index) {
+                if ((base.notes[index] == 0) && (ev.keyCode == index)) {
+                    base.notes[index] = 1;
+                    for (var i = 0; i < item.length; i++) {
+                        midi.play_note(base.chordchannel, item[i], 127);
+                    }
+                }
+            });
+        } else if (ev.type == "keyup") {
+            chords.forEach(function(item, index) {
+                if ((base.notes[index] == 1) && (ev.keyCode == index)) {
+                    base.notes[index] = 0;
+                    for (var i = 0; i < item.length; i++) {
+                        midi.kill_note(base.chordchannel, item[i], 127);
+                    }
+                }
+            });
+        }
+
+
     }
 };

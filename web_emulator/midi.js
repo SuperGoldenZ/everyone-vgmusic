@@ -136,7 +136,7 @@ let midi = {
     program_change:function (channel, programNumber) {
       channel--;
       if (this.midiOut != null) {
-        this.midiOut.send([0xC0 + channel, programNumber]);
+        this.midiOut.send([0xC0 + channel, programNumber-1]);
       }
     }
 };
