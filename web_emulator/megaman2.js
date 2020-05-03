@@ -11,9 +11,11 @@ let megaman2 = {
     drumchannel: 10,
     state: "menu",
     flutechannel: 5,
+    base: null,
     main: function() {
         var index;
         this.state = "menu";
+        base = this;
         for (index = 0; index < 127; index++)
             this.notes[index] = 0;
 
@@ -196,8 +198,8 @@ let megaman2 = {
         $(".everyoneConsole").append("Mega Man 2<br/>");
         $(".everyoneConsole").append("Press ESC to quit...");
         $(".everyoneConsole").append("<br/>1: Start the intro");
-        $(".everyoneConsole").append("<br/>2: Flashman");
-        $(".everyoneConsole").append("<br/>3: Dr. Wily's Castle");
+        //$(".everyoneConsole").append("<br/>2: Flashman");
+        //$(".everyoneConsole").append("<br/>3: Dr. Wily's Castle");
     },
     clrscr: function() {
         $(".everyoneConsole").html("");
@@ -206,154 +208,39 @@ let megaman2 = {
         $(".everyoneConsole").append(txt);
     },
     dobass: function(ev) {
+
+        let mapping = [];
+        mapping[keyboard.INDEX_SPACE] = 42;
+        mapping[keyboard.INDEX_UP] = 41;
+        mapping[keyboard.INDEX_RIGHT] = 39;
+        mapping[keyboard.INDEX_Y] = 38;
+        mapping[keyboard.INDEX_DOWN] = 37;
+        mapping[keyboard.INDEX_LEFT] = 36;
+        mapping[keyboard.INDEX_N] = 35;
+        mapping[keyboard.INDEX_I] = 34;
+        mapping[keyboard.INDEX_Q] = 33;
+        mapping[keyboard.INDEX_ENTER] = 39;
+        mapping[keyboard.INDEX_D] = 44;
+        mapping[keyboard.INDEX_V] = 40;
+        mapping[keyboard.INDEX_CTRL] = 45;
+
         if (ev.type == "keydown") {
             console.log("keydown");
-
-            if ((this.notes[keyboard.INDEX_SPACE] == 0) && (ev.keyCode == keyboard.INDEX_SPACE)) {
-                this.notes[keyboard.INDEX_SPACE] = 1;
-                midi.play_note(this.basschannel, 42, 127);
-            }
+            mapping.forEach(function(item, index) {
+                if ((base.notes[index] == 0) && (ev.keyCode == index)) {
+                    base.notes[index] = 1;
+                    midi.play_note(base.basschannel, item, 127);
+                }
+            });
         } else if (ev.type == "keyup") {
-            if ((this.notes[keyboard.INDEX_SPACE] == 1) && (ev.keyCode == keyboard.INDEX_SPACE)) {
-                midi.kill_note(this.basschannel, 42, 127);
-                this.notes[keyboard.INDEX_SPACE] = 0;
-            }
+            mapping.forEach(function(item, index) {
+                if ((base.notes[index] == 1) && (ev.keyCode == index)) {
+                    base.notes[index] = 0;
+                    midi.kill_note(base.basschannel, item, 127);
+                }
+            });
         }
 
-
-        // if ((this.notes[keyboard.INDEX_UP] == 0) && (keyboard.key_table[keyboard.INDEX_UP]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_UP]=1;   
-        //   play_note(3,41,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_UP] == 1) && (keyboard.key_table[keyboard.INDEX_UP]==0))   
-        // {   
-        //   kill_note(3,41,127);   
-        //   this.notes[keyboard.INDEX_UP]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_RIGHT] == 0) && (keyboard.key_table[keyboard.INDEX_RIGHT]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_RIGHT]=1;   
-        //   play_note(3,39,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_RIGHT] == 1) && (keyboard.key_table[keyboard.INDEX_RIGHT]==0))   
-        // {   
-        //   kill_note(3,39,127);   
-        //   this.notes[keyboard.INDEX_RIGHT]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_Y] == 0) && (keyboard.key_table[keyboard.INDEX_Y]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_Y]=1;   
-        //   play_note(3,38,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_Y] == 1) && (keyboard.key_table[keyboard.INDEX_Y]==0))   
-        // {   
-        //   kill_note(3,38,127);   
-        //   this.notes[keyboard.INDEX_Y]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_DOWN] == 0) && (keyboard.key_table[keyboard.INDEX_DOWN]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_DOWN]=1;   
-        //   play_note(3,37,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_DOWN] == 1) && (keyboard.key_table[keyboard.INDEX_DOWN]==0))   
-        // {   
-        //   kill_note(3,37,127);   
-        //   this.notes[keyboard.INDEX_DOWN]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_LEFT] == 0) && (keyboard.key_table[keyboard.INDEX_LEFT]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_LEFT]=1;   
-        //   play_note(3,36,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_LEFT] == 1) && (keyboard.key_table[keyboard.INDEX_LEFT]==0))   
-        // {   
-        //   kill_note(3,36,127);   
-        //   this.notes[keyboard.INDEX_LEFT]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_N] == 0) && (keyboard.key_table[keyboard.INDEX_N]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_N]=1;   
-        //   play_note(3,35,127);   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_N] == 1) && (keyboard.key_table[keyboard.INDEX_N]==0))   
-        // {   
-        //   kill_note(3,35,127);   
-        //   this.notes[keyboard.INDEX_N]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_I] == 0) && (keyboard.key_table[keyboard.INDEX_I]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_I]=1;   
-        //   play_note(3,34,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_I] == 1) && (keyboard.key_table[keyboard.INDEX_I]==0))   
-        // {   
-        //   kill_note(3,34,127);   
-        //   this.notes[keyboard.INDEX_I]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_ENTER] == 0) && (keyboard.key_table[keyboard.INDEX_ENTER]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_ENTER]=1;   
-        //   play_note(3,39,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_ENTER] == 1) && (keyboard.key_table[keyboard.INDEX_ENTER]==0))   
-        // {   
-        //   kill_note(3,39,127);   
-        //   this.notes[keyboard.INDEX_ENTER]=0;   
-        // }   
-
-        // //old 33
-        // if ((this.notes[keyboard.INDEX_Q] == 0) && (keyboard.key_table[keyboard.INDEX_Q]==1))
-        // {   
-        //   this.notes[keyboard.INDEX_Q]=1;   
-        //   play_note(3,33,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_Q] == 1) && (keyboard.key_table[keyboard.INDEX_Q]==0))   
-        // {   
-        //   kill_note(3,33,127);   
-        //   this.notes[keyboard.INDEX_Q]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_D] == 0) && (keyboard.key_table[keyboard.INDEX_D]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_D]=1;   
-        //   play_note(3,44,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_D] == 1) && (keyboard.key_table[keyboard.INDEX_D]==0))   
-        // {   
-        //   kill_note(3,44,127);   
-        //   this.notes[keyboard.INDEX_D]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_V] == 0) && (keyboard.key_table[keyboard.INDEX_V]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_V]=1;   
-        //   play_note(3,40,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_V] == 1) && (keyboard.key_table[keyboard.INDEX_V]==0))   
-        // {   
-        //   kill_note(3,40,127);   
-        //   this.notes[keyboard.INDEX_V]=0;   
-        // }   
-
-        // if ((this.notes[keyboard.INDEX_CTRL] == 0) && (keyboard.key_table[keyboard.INDEX_CTRL]==1))   
-        // {   
-        //   this.notes[keyboard.INDEX_CTRL]=1;   
-        //   play_note(3,45,127);   
-        // }   
-        // if ((this.notes[keyboard.INDEX_CTRL] == 1) && (keyboard.key_table[keyboard.INDEX_CTRL]==0))   
-        // {   
-        //   kill_note(3,45,127);   
-        //   this.notes[keyboard.INDEX_CTRL]=0;   
-        // }   
     },
 
     //***
