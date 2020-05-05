@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	everyoneConsole = $('#console').everyoneConsole([megaman2]);
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
-
 	/*
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
     jsRapPiano = $('#pianoInput').jsRapPiano({
@@ -16,7 +15,6 @@ $(document).ready(function() {
 var midi_inputs = [];
 var midi_outputs = [];
 
-
 function onMidiFailure() {
     console.log("no midi for you");
 }
@@ -27,7 +25,8 @@ function onMidiAccess(access) {
     const outputs = access.outputs.values();
     var i = 1;
 
-    midi_outputs.push(everyoneSynth);
+
+    midi_outputs.push(MIDI);
     out = midi_outputs[0];
     midi.midiOut = out;
     for (var output of access.outputs.values()) {

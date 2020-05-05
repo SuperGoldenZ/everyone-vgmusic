@@ -16,7 +16,18 @@
             });
 
             $(document).keydown(function(ev) {
-                everyoneSynth.InitSynth();
+
+            if (typeof MIDI.send === "undefined") {
+                MIDI.loadPlugin({
+                    instruments: ["acoustic_bass", "fretless_bass", "acoustic_grand_piano", "flute", 
+                        "lead_1_square", "synth_strings_1"],
+                    soundfontUrl: "https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/",
+                    onsuccess: function (ev) {
+                        console.log("plugin loaded!!");
+                    }
+                });
+            }
+
 
                 let commandFound = false;
                 if (base.activeSong != null) {

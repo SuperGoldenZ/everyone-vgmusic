@@ -91,11 +91,12 @@ let midi = {
     C7: 108,
 
     midiOut: null,
-    play_note: function(channel, note, velocity) {
+    play_note: function(channel, note, velocity) {        
         //console.log("play note: " + channel + ", " + note + ", " + velocity);
-        if (note == 0) return 0;
+        if (note == 0) return 0;        
         channel--;
         if ((channel >= 0) && (channel <= 15)) {
+
             let message = [];
             message[0] = 0x90;
             message[0] += channel;
@@ -106,7 +107,14 @@ let midi = {
                 return -1;
             }
             //console.log(message);
-            this.midiOut.send(message);
+
+            if (typeof this.midiOut.WebMIDI !== "undefined") {                                
+                MIDI.noteOn(channel+1, note, velocity);                
+                //this.midiOut.send(message);
+            } else {
+                this.midiOut.send(message);    
+            }
+            
         }
         return 1;
     },
@@ -116,6 +124,7 @@ let midi = {
         if (note == 0) return 0;
         channel--;
         if ((channel >= 0) && (channel <= 15)) {
+
             let message = [];
             message[0] = 0x80;
             message[0] += channel;
@@ -127,13 +136,22 @@ let midi = {
                 return -1;
             }
 
-            this.midiOut.send(message);
+            if (typeof this.midiOut.WebMIDI !== "undefined") {                                
+                MIDI.noteOff(channel+1, note);                                
+            } else {
+                this.midiOut.send(message);
+            }
 
         }
         return 1;
-    },
+    },    
 
     program_change: function(channel, programNumber) {
+        if (typeof this.midiOut.programChange !== "undefined")  
+        {
+            MIDI.programChange(channel, programNumber-1 );
+            return;
+        }
         channel--;
         if (this.midiOut != null) {
             this.midiOut.send([0xC0 + channel, programNumber - 1]);

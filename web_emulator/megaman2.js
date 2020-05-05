@@ -167,6 +167,7 @@ let megaman2 = {
         midi.program_change(this.flutechannel, 74);
         midi.program_change(this.chordchannel, 51);
         midi.program_change(this.counterchannel, 81);
+        midi.program_change(this.drumchannel, 115);
     },
 
     keydown: function(ev) {
