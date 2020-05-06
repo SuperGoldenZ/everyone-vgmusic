@@ -2,10 +2,12 @@
 	<head>		
 		<title>Everyone: VG Music (web emulator)</title>
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+        <script src = "Base64Binary.js"></script>
+        <script src = "MIDI.min.js"></script>        
 		<script src = "midi.js"></script>
 		<script src = "keyboard.js"></script>
 		<script src = "megaman2.js"></script>
-        <script src = "everyoneSynth.js"></script>
+        <script src = "midi-js-gm1-percussion/steel_drums-mp3.js"></script>
 		<script src = "everyoneConsole.js"></script>
 		<script src = "everyoneEmulator.js"></script>        
 		<link rel="stylesheet" type="text/css" href="everyoneConsole.css">
@@ -21,7 +23,7 @@
                 </td>
                 <td>
                     <select id="midi_outputs">
-                        <option value = "0">Everyone Synth</option>
+                        <option value = "0">MIDI.js</option>
                     </select><br />
                 </td>
             </tr>
@@ -35,8 +37,24 @@
                 </td>
             </tr>
         </table>
+
+    <div class = "Credits">
+        <br/>
+        Powered by:<br/>
+        <a href = "https://github.com/mudcube/MIDI.js/">MIDI.js</a>
+
+        (<a href="https://raw.githubusercontent.com/mudcube/MIDI.js/master/LICENSE.txt">MIT License</a>)<br/>
+
+        <a href = "https://github.com/gleitz/midi-js-soundfonts">midi-js-soundfonts</a>
+        (<a href="https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/LICENSE.txt">MIT License</a>)
+        <br/>
+
+        <a href="https://www.musescore.org/download/fluid-soundfont.tar.gz">FluidR3_GM.sf2</a>
+        (<a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 license</a>) <br/>
+        <a href= "https://github.com/johntu/midi-js-gm1-percussion">midi-js-gm1-percussion</a>
     </div>
 
+    </div>
 		<div id = "console">
 			C:\EVERYONE\>
 		</div>
