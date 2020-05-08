@@ -158,6 +158,7 @@ let megaman2 = {
             this.drumbassnotes[37][index] = midi.C2;
 
         $(".score").fadeIn(500);
+        $(".everyoneConsole").css("flex-direction", "row");
         this.generalMidiSetup();
         this.menu();    
     },
@@ -174,8 +175,10 @@ let megaman2 = {
         if (ev.keyCode == 27) {
             if (this.state == "wily") {
                 this.state = "done_wily";
-            } else {
+            } else if (this.state == "menu") {
                 this.done();
+            } else if (this.state == "intro" || this.state == "drums") {
+                this.state = "done";
             }
             return;
         }
@@ -211,6 +214,7 @@ let megaman2 = {
         }
     },
     done: function() {
+        $(".everyoneConsole").css("flex-direction", "column-reverse");
         $(".everyoneConsole").html("");
         $(".everyoneConsole").append("Hope Mega Man went well!");
         this.state = "done";
@@ -221,8 +225,10 @@ let megaman2 = {
     },
 
     menu: function() {
+        this.state = "menu";
+
         $(".everyoneConsole").html("");
-        $(".everyoneConsole").append("Mega Man 2<br/>");
+        this.cout("Mega Man 2<br/>");        
         $(".everyoneConsole").append("Press ESC to quit...");
         $(".everyoneConsole").append("<br/>1: Start the intro");
         //$(".everyoneConsole").append("<br/>2: Flashman");
@@ -231,8 +237,10 @@ let megaman2 = {
     clrscr: function() {
         $(".everyoneConsole").html("");
     },
-    cout: function(txt) {
-        $(".everyoneConsole").append(txt);
+    cout: function(txt, force = false) {
+        if (force || (this.state != "done" && this.state != "done_wily")) {
+            $(".everyoneConsole").append(txt);
+        }
     },
     dobass: function(ev) {
 
@@ -729,8 +737,13 @@ let megaman2 = {
         await this.delay2(nspeed * 16);
         midi.kill_note(this.flutechannel, midi.D5, flutelevel);
         await this.delay2(nspeed * 2);
-        this.cout("<br/>LET GO");
-        this.drums(92);
+
+        if (this.state != "done") {
+            this.cout("<br/>LET GO");
+            this.drums(92);            
+        } else {
+            this.menu();
+        }
     },
 
     //DRUMS!   
@@ -746,7 +759,8 @@ let megaman2 = {
             this.notes[index] = 0;
 
         let count = 0;
-
+        $(".score").css("background-image", "url(\"./megaman2_intro_chords.jpg\")");
+        
         while (1) {
             if ((count == 1) && (measure == 35))
                 break;
@@ -1259,6 +1273,10 @@ let megaman2 = {
                 if ((measure == 22) || (measure == 30))
                     midi.kill_note(this.drumchannel, midi.CS2, 127);
             }
+
+            if (this.state == "done") {
+                break;
+            }
         }
 
         for (index = 0; index < 1; index++) {
@@ -1409,11 +1427,11 @@ let megaman2 = {
 
     dostuff: function(ev) {
         let chords = [];
-        chords[keyboard.INDEX_1] = [72, 67, 63, 60];
-        chords[keyboard.INDEX_2] = [70, 65, 62, 58];
-        chords[keyboard.INDEX_3] = [68, 63, 60, 56];
-        chords[keyboard.INDEX_4] = [67, 62, 59, 55];
-        chords[keyboard.INDEX_5] = [72, 67, 64, 60];
+        chords[keyboard.INDEX_1] = [midi.C4,  67, midi.DS3, midi.C3];
+        chords[keyboard.INDEX_2] = [midi.AS3, 65, 62,       midi.AS3];
+        chords[keyboard.INDEX_3] = [midi.GS3, 63, 60,       midi.GS2];
+        chords[keyboard.INDEX_4] = [midi.G3,  62, 59,       midi.G2];
+        chords[keyboard.INDEX_5] = [midi.C4,  67, midi.E3,  midi.C3];
 
         if (ev.type == "keydown") {
             chords.forEach(function(item, index) {
@@ -1440,6 +1458,8 @@ let megaman2 = {
         this.clrscr();
         this.cout("Dr. Wily's castle!");
         this.cout("<br/>Press ESC to quit");
+
+        $(".score").css("background-image", "url(\"./megaman2_skull_castle_notes.jpg\")");
         let measure = -1;
 
         midi.change_volume(2, 99);

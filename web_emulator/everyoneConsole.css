@@ -43,6 +43,8 @@ body {
 
 .score {
 	background-image: url("./megaman2_intro_bass_notes.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;	
 	min-width: 707px;
 	min-height: 399px;
 	position: fixed;
