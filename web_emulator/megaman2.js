@@ -287,9 +287,9 @@ let megaman2 = {
 
         // change_program(2,9,0); //tinestring
         // change_effects_channel(8);
-        // all_lights_off(0);
-        // change_light_level(2,127);
-        // change_light_level(4,50);
+        lights.all_lights_off(0);
+        lights.change_light_level(2,127);
+        lights.change_light_level(4,50);
 
         let measure = 1;
         this.cout("Playing Mega Man 2 intro...");
@@ -760,7 +760,9 @@ let megaman2 = {
 
         let count = 0;
         $(".score").css("background-image", "url(\"./megaman2_intro_chords.jpg\")");
-        
+
+        lights.change_light_level(9,127);
+
         while (1) {
             if ((count == 1) && (measure == 35))
                 break;
@@ -771,11 +773,11 @@ let megaman2 = {
                 count++;
             }
             if (measure == 35) {
-                // change_light_level(1,50);
-                // change_light_level(2,75);
-                // change_light_level(3,25);
-                // change_light_level(3,50);
-                // change_light_level(9,0);
+                lights.change_light_level(1,50);
+                lights.change_light_level(2,75);
+                lights.change_light_level(3,25);
+                lights.change_light_level(3,50);
+                lights.change_light_level(9,0);
 
                 this.cout("<br/>Measure: " + ++measure + " (pre solo 1)");
                 midi.play_note(this.basschannel, midi.GS1, 127);
@@ -1147,12 +1149,12 @@ let megaman2 = {
                 midi.kill_note(this.basschannel, midi.AS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.FS1, 127);
-                this.cout("  end of measure 45");
-                // change_light_level(9,127);
-                // change_light_level(1,0);
-                // change_light_level(2,0);
-                // change_light_level(3,0);
-                // change_light_level(4,0);
+                this.cout("  end of measure 45");                
+                lights.change_light_level(1,0);
+                lights.change_light_level(2,0);
+                lights.change_light_level(3,0);
+                lights.change_light_level(4,0);
+                lights.change_light_level(9,127);
             } else //!!else  (main thing)
             {
                 this.cout("<br/>Measure: " + ++measure + " !!else");
@@ -1281,11 +1283,11 @@ let megaman2 = {
 
         for (index = 0; index < 1; index++) {
             midi.kill_note(10, 54, 127);
-            // change_light_level(9,0);
-            // change_light_level(1,50);
-            // change_light_level(2,75);
-            // change_light_level(3,25);
-            // change_light_level(4,50);
+            lights.change_light_level(9,0);
+            lights.change_light_level(1,50);
+            lights.change_light_level(2,75);
+            lights.change_light_level(3,25);
+            lights.change_light_level(4,50);
             //measure one of end
             midi.play_note(10, midi.D2, 127);
             midi.play_note(10, midi.D1, 127);
@@ -1499,10 +1501,10 @@ let megaman2 = {
         midi.kill_note(10, 38, 127);
 
         measure = -1;
-        //change_light_level(1,50);
-        //change_light_level(2,75);
-        //change_light_level(3,25);
-        //change_light_level(4,50);
+        lights.change_light_level(1,50);
+        lights.change_light_level(2,75);
+        lights.change_light_level(3,25);
+        lights.change_light_level(4,50);
 
         while (1) {
 
