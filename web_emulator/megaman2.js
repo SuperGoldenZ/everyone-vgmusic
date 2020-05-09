@@ -13,6 +13,7 @@ let megaman2 = {
     chordchannel: 4,
     flutechannel: 5,
     counterchannel: 6,
+    synthBassChannel: 7,
     base: null,
     main: function() {
         var index;
@@ -27,148 +28,151 @@ let megaman2 = {
         }
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[0][index] = midi.CS2;
+            this.bassnotes[0][index] = midi.CS2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[1][index] = midi.CS2;
+            this.bassnotes[1][index] = midi.CS2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[2][index] = midi.A2;
+            this.bassnotes[2][index] = midi.A2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[3][index] = midi.A2;
+            this.bassnotes[3][index] = midi.A2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[4][index] = midi.B2;
+            this.bassnotes[4][index] = midi.B2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[5][index] = midi.B2;
+            this.bassnotes[5][index] = midi.B2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[6][index] = midi.CS2;
+            this.bassnotes[6][index] = midi.CS2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[7][index] = midi.CS2;
-        this.bassnotes[7][10] = midi.B2;
-        this.bassnotes[7][11] = midi.CS2;
+            this.bassnotes[7][index] = midi.CS2 - 12;
+        this.bassnotes[7][10] = midi.B2 - 12;
+        this.bassnotes[7][11] = midi.CS2 - 12;
 
         for (var measure = 8; measure < 16; measure++)
             for (var note = 0; note < 12; note++)
                 this.bassnotes[measure][note] = this.bassnotes[measure - 8][note];
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[16][index] = midi.D2;
+            this.bassnotes[16][index] = midi.D2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[17][index] = midi.D2;
+            this.bassnotes[17][index] = midi.D2 - 12;
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[18][index] = midi.CS2;
+            this.bassnotes[18][index] = midi.CS2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[19][index] = midi.CS2;
+            this.bassnotes[19][index] = midi.CS2 - 12;
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[20][index] = midi.D2;
+            this.bassnotes[20][index] = midi.D2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[21][index] = midi.D2;
+            this.bassnotes[21][index] = midi.D2 - 12;
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[22][index] = midi.B2;
+            this.bassnotes[22][index] = midi.B2 - 12;
         for (index = 0; index < 12; index++)
-            this.bassnotes[23][index] = midi.C2;
+            this.bassnotes[23][index] = midi.C2 - 12;
 
         for (index = 0; index < 24; index++)
             for (var index1 = 0; index1 < 12; index1++)
                 this.bassnotes[24 + index][index1] = this.bassnotes[index][index1];
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[48][index] = midi.A2;
+            this.bassnotes[48][index] = midi.A2 - 12;
 
         for (index = 0; index < 11; index++)
-            this.bassnotes[49][index] = midi.B2;
-        this.bassnotes[49][11] = midi.CS2;
+            this.bassnotes[49][index] = midi.B2 - 12;
+        this.bassnotes[49][11] = midi.CS2 - 12;
 
         for (index = 0; index < 12; index++)
             this.bassnotes[50][index] = 0;
-        this.bassnotes[50][0] = midi.CS2;
-        this.bassnotes[50][3] = midi.CS2;
-        this.bassnotes[50][4] = midi.DS2;
-        this.bassnotes[50][6] = midi.E2;
-        this.bassnotes[50][9] = midi.DS2;
-        this.bassnotes[50][11] = midi.CS2;
+        this.bassnotes[50][0] = midi.CS2 - 12;
+        this.bassnotes[50][3] = midi.CS2 - 12;
+        this.bassnotes[50][4] = midi.DS2 - 12;
+        this.bassnotes[50][6] = midi.E2 - 12;
+        this.bassnotes[50][9] = midi.DS2 - 12;
+        this.bassnotes[50][11] = midi.CS2 - 12;
 
         for (index = 0; index < 12; index++)
             this.bassnotes[51][index] = 0;
-        this.bassnotes[51][0] = midi.CS2;
-        this.bassnotes[51][3] = midi.CS2;
-        this.bassnotes[51][4] = midi.DS2;
-        this.bassnotes[51][6] = midi.E2;
-        this.bassnotes[51][9] = midi.DS2;
+        this.bassnotes[51][0] = midi.CS2 - 12;
+        this.bassnotes[51][3] = midi.CS2 - 12;
+        this.bassnotes[51][4] = midi.DS2 - 12;
+        this.bassnotes[51][6] = midi.E2 - 12;
+        this.bassnotes[51][9] = midi.DS2 - 12;
         //  this.bassnotes[51][11] = CS1;   
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[52][index] = midi.A2;
+            this.bassnotes[52][index] = midi.A2 - 12;
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[53][index] = midi.B2;
+            this.bassnotes[53][index] = midi.B2 - 12;
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[54][index] = midi.CS2;
+            this.bassnotes[54][index] = midi.CS2 - 12;
 
         for (index = 0; index < 12; index++)
-            this.bassnotes[55][index] = midi.CS2;
+            this.bassnotes[55][index] = midi.CS2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[22][index] = midi.C2;
+            this.drumbassnotes[22][index] = midi.C2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[23][index] = midi.C2;
+            this.drumbassnotes[23][index] = midi.C2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[24][index] = midi.C2;
+            this.drumbassnotes[24][index] = midi.C2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[25][index] = midi.G2;
+            this.drumbassnotes[25][index] = midi.G2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[26][index] = midi.C2;
+            this.drumbassnotes[26][index] = midi.C2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[27][index] = midi.C2;
+            this.drumbassnotes[27][index] = midi.C2 - 12;
 
         for (index = 0; index < 4; index++)
-            this.drumbassnotes[28][index] = midi.GS1;
+            this.drumbassnotes[28][index] = midi.GS1 - 12;
         for (index = 4; index < 8; index++)
-            this.drumbassnotes[28][index] = midi.AS1;
+            this.drumbassnotes[28][index] = midi.AS1 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[29][index] = midi.C2;
+            this.drumbassnotes[29][index] = midi.C2 - 12;
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[30][index] = midi.C2;
+            this.drumbassnotes[30][index] = midi.C2 - 12;
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[31][index] = midi.C2;
+            this.drumbassnotes[31][index] = midi.C2 - 12;
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[32][index] = midi.C2;
+            this.drumbassnotes[32][index] = midi.C2 - 12;
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[33][index] = midi.G2;
+            this.drumbassnotes[33][index] = midi.G2 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[34][index] = midi.C2;
+            this.drumbassnotes[34][index] = midi.C2 - 12;
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[35][index] = midi.C2;
+            this.drumbassnotes[35][index] = midi.C2 - 12;
 
         for (index = 0; index < 4; index++)
-            this.drumbassnotes[36][index] = midi.GS1;
+            this.drumbassnotes[36][index] = midi.GS1 - 12;
         for (index = 4; index < 8; index++)
-            this.drumbassnotes[36][index] = midi.AS1;
+            this.drumbassnotes[36][index] = midi.AS1 - 12;
 
         for (index = 0; index < 8; index++)
-            this.drumbassnotes[37][index] = midi.C2;
+            this.drumbassnotes[37][index] = midi.C2 - 12;
 
         $(".score").fadeIn(500);
         $(".everyoneConsole").css("flex-direction", "row");
         this.generalMidiSetup();
-        this.menu();    
+        this.menu();
     },
 
     generalMidiSetup: function() {
-        midi.program_change(this.basschannel, 36);
-        midi.program_change(this.flutechannel, 74);
-        midi.program_change(this.chordchannel, 51);
-        midi.program_change(this.counterchannel, 81);
-        midi.program_change(this.drumchannel, 115);
+        //midi.program_change(this.basschannel, 36);
+        midi.program_change(1, 5);
+        midi.program_change(megaman2.basschannel, 34);
+        midi.program_change(megaman2.synthBassChannel, 39);
+        midi.program_change(megaman2.flutechannel, 74);
+        midi.program_change(megaman2.chordchannel, 51);
+        midi.program_change(megaman2.counterchannel, 81);
+        midi.program_change(megaman2.drumchannel, 115);
     },
 
     keydown: function(ev) {
@@ -220,10 +224,10 @@ let megaman2 = {
         this.state = "done";
         $(".score").fadeOut(500);
         if (this.onDone != null) {
-            lights.change_light_level(1,127);
-            lights.change_light_level(2,127);
-            lights.change_light_level(3,127);
-            lights.change_light_level(4,127);
+            lights.change_light_level(1, 127);
+            lights.change_light_level(2, 127);
+            lights.change_light_level(3, 127);
+            lights.change_light_level(4, 127);
             this.onDone();
         }
     },
@@ -232,7 +236,7 @@ let megaman2 = {
         this.state = "menu";
 
         $(".everyoneConsole").html("");
-        this.cout("Mega Man 2<br/>");        
+        this.cout("Mega Man 2<br/>");
         $(".everyoneConsole").append("Press ESC to quit...");
         $(".everyoneConsole").append("<br/>1: Start the intro");
         //$(".everyoneConsole").append("<br/>2: Flashman");
@@ -263,7 +267,7 @@ let megaman2 = {
         mapping[keyboard.INDEX_CTRL] = midi.A1;
 
         //mapping[keyboard.INDEX_I] = 34;
-        
+
 
         if (ev.type == "keydown") {
             console.log("keydown");
@@ -287,13 +291,13 @@ let megaman2 = {
     //***
     go: async function() {
         let = nspeed = 135;
-        this.clrscr();        
+        this.clrscr();
         $(".score").css("background-image", "url(\"./megaman2_intro_bass_notes.jpg\")");
         // change_program(2,9,0); //tinestring
         // change_effects_channel(8);
         lights.all_lights_off(0);
-        lights.change_light_level(2,127);
-        lights.change_light_level(4,50);
+        lights.change_light_level(2, 127);
+        lights.change_light_level(4, 50);
 
         let measure = 1;
         this.cout("Playing Mega Man 2 intro...");
@@ -744,7 +748,7 @@ let megaman2 = {
 
         if (this.state != "done") {
             this.cout("<br/>LET GO");
-            this.drums(92);            
+            this.drums(92);
         } else {
             this.menu();
         }
@@ -762,10 +766,10 @@ let megaman2 = {
         for (index = 0; index < 127; index++)
             this.notes[index] = 0;
 
-        let count = 0;        
+        let count = 0;
         $(".score").css("background-image", "url(\"./megaman2_intro_chords.jpg\")");
 
-        lights.change_light_level(9,127);
+        lights.change_light_level(9, 127);
 
         while (1) {
             if ((count == 1) && (measure == 35))
@@ -777,127 +781,127 @@ let megaman2 = {
                 count++;
             }
             if (measure == 35) {
-                lights.change_light_level(1,50);
-                lights.change_light_level(2,75);
-                lights.change_light_level(3,25);
-                lights.change_light_level(3,50);
-                lights.change_light_level(9,0);
+                lights.change_light_level(1, 50);
+                lights.change_light_level(2, 75);
+                lights.change_light_level(3, 25);
+                lights.change_light_level(3, 50);
+                lights.change_light_level(9, 0);
 
                 this.cout("<br/>Measure: " + ++measure + " (pre solo 1)");
-                midi.play_note(this.basschannel, midi.GS1, 127);
+                midi.play_note(this.synthBassChannel, midi.GS1, 127);
                 midi.play_note(this.drumchannel, midi.D2, 127);
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.D2, 127);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
-                midi.kill_note(this.basschannel, midi.GS1, 127);
-                midi.play_note(this.basschannel, midi.GS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS1, 127);
+                midi.play_note(this.synthBassChannel, midi.GS1, 127);
                 midi.play_note(this.drumchannel, midi.C2, 127);
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.C2, 127);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
-                midi.kill_note(this.basschannel, midi.GS1, 127);
-                midi.play_note(this.basschannel, midi.GS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS1, 127);
+                midi.play_note(this.synthBassChannel, midi.GS1, 127);
                 midi.play_note(this.drumchannel, midi.B1, 127);
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.B1, 127);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
-                midi.kill_note(this.basschannel, midi.GS1, 127);
-                midi.play_note(this.basschannel, midi.GS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS1, 127);
+                midi.play_note(this.synthBassChannel, midi.GS1, 127);
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
-                midi.kill_note(this.basschannel, midi.GS1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 midi.play_note(this.drumchannel, midi.A2, 127);
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
                 midi.kill_note(this.drumchannel, midi.A2, 127);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
 
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
             } else
             if (measure == 36) {
                 this.cout("<br/>Measure: " + ++measure + " (pre solo 2)");
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 midi.play_note(this.drumchannel, midi.DS1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS1, 127);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
                 midi.play_note(this.drumchannel, midi.DS1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
-                await this.delay1(speed);
-                await this.delay1(speed);
-                midi.kill_note(this.drumchannel, midi.DS1, 127);
-                midi.kill_note(this.drumchannel, midi.C1, 127);
-                midi.play_note(this.drumchannel, midi.DS1, 127);
-                midi.play_note(this.drumchannel, midi.C1, 127);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
-                await this.delay1(speed);
-                await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS1, 127);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
                 midi.play_note(this.drumchannel, midi.DS1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS1, 127);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
-                midi.kill_note(this.basschannel, midi.C2, 127);
+                midi.play_note(this.drumchannel, midi.DS1, 127);
+                midi.play_note(this.drumchannel, midi.C1, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
+                await this.delay1(speed);
+                await this.delay1(speed);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
+                await this.delay1(speed);
+                await this.delay1(speed);
+                midi.kill_note(this.drumchannel, midi.DS1, 127);
+                midi.kill_note(this.drumchannel, midi.C1, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
             } else
             if ((measure == 37) || (measure == 38)) {
                 //Measures 38 and 39
                 this.cout("<br/>Measure: " + ++measure);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
@@ -909,42 +913,42 @@ let megaman2 = {
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.G1, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
-                midi.play_note(this.basschannel, midi.C2, 127);
+                midi.play_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.C2, 127);
+                midi.kill_note(this.synthBassChannel, midi.C2, 127);
                 await this.delay1(speed);
             } else
             if ((measure == 39) || (measure == 40)) {
                 this.cout("<br/>Measure: " + ++measure);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
@@ -956,42 +960,42 @@ let megaman2 = {
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.G1, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
-                midi.play_note(this.basschannel, midi.AS1, 127);
+                midi.play_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.AS1, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS1, 127);
                 await this.delay1(speed);
             } else
             if ((measure == 41) || (measure == 42)) {
                 this.cout("<br/>Measure: " + ++measure);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.A1, 127);
+                midi.play_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.A1, 127);
+                midi.kill_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
@@ -1003,42 +1007,42 @@ let megaman2 = {
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.A1, 127);
+                midi.play_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.A1, 127);
-                midi.play_note(this.basschannel, midi.A1, 127);
+                midi.kill_note(this.synthBassChannel, midi.A1, 127);
+                midi.play_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.G1, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.A1, 127);
+                midi.kill_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
-                midi.play_note(this.basschannel, midi.A1, 127);
+                midi.play_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.A1, 127);
+                midi.kill_note(this.synthBassChannel, midi.A1, 127);
                 await this.delay1(speed);
             } else
             if ((measure == 43)) {
                 this.cout("<br/>Measure: " + ++measure);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
@@ -1050,32 +1054,32 @@ let megaman2 = {
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.G1, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.play_note(this.drumchannel, midi.C1, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.DS2, 127);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.C1, 127);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
             } else
             if ((measure == 44)) // end?
@@ -1084,7 +1088,7 @@ let megaman2 = {
             } else
             if ((measure == 45)) {
                 this.cout("<br/>Measure: " + ++measure);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 midi.play_note(this.drumchannel, midi.D2, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.D1, 127);
@@ -1097,7 +1101,7 @@ let megaman2 = {
                 midi.play_note(this.drumchannel, midi.C2, 127);
 
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.D1, 127);
                 midi.kill_note(this.drumchannel, midi.C2, 127);
@@ -1115,11 +1119,11 @@ let megaman2 = {
                 midi.kill_note(this.drumchannel, midi.DS2, 127);
                 midi.play_note(this.drumchannel, midi.F1, 127);
                 midi.play_note(this.drumchannel, midi.A1, 127);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
-                midi.play_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
+                midi.play_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.F1, 127);
                 midi.kill_note(this.drumchannel, midi.A1, 127);
@@ -1128,7 +1132,7 @@ let megaman2 = {
                 midi.play_note(this.drumchannel, midi.E1, 127);
                 midi.play_note(this.drumchannel, midi.D1, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, midi.GS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.GS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.A2, 127);
                 midi.kill_note(this.drumchannel, midi.E1, 127);
@@ -1136,7 +1140,7 @@ let megaman2 = {
                 midi.play_note(this.drumchannel, midi.B0, 127);
                 midi.play_note(this.drumchannel, midi.D1, 127);
                 midi.play_note(this.drumchannel, midi.FS1, 127);
-                midi.play_note(this.basschannel, midi.AS2, 127);
+                midi.play_note(this.synthBassChannel, midi.AS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.B0, 127);
                 midi.kill_note(this.drumchannel, midi.D1, 127);
@@ -1150,15 +1154,15 @@ let megaman2 = {
                 midi.kill_note(this.drumchannel, midi.FS1, 127);
                 midi.kill_note(this.drumchannel, midi.D1, 127);
                 midi.play_note(this.drumchannel, midi.FS1, 127);
-                midi.kill_note(this.basschannel, midi.AS2, 127);
+                midi.kill_note(this.synthBassChannel, midi.AS2, 127);
                 await this.delay1(speed);
                 midi.kill_note(this.drumchannel, midi.FS1, 127);
-                this.cout("  end of measure 45");                
-                lights.change_light_level(1,0);
-                lights.change_light_level(2,0);
-                lights.change_light_level(3,0);
-                lights.change_light_level(4,0);
-                lights.change_light_level(9,127);
+                this.cout("  end of measure 45");
+                lights.change_light_level(1, 0);
+                lights.change_light_level(2, 0);
+                lights.change_light_level(3, 0);
+                lights.change_light_level(4, 0);
+                lights.change_light_level(9, 127);
             } else //!!else  (main thing)
             {
                 this.cout("<br/>Measure: " + ++measure + " !!else");
@@ -1167,14 +1171,14 @@ let megaman2 = {
 
                 midi.play_note(10, 36, 127);
                 midi.play_note(10, 42, 127);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][0], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][0], basslevel);
                 await this.delay1(speed);
                 midi.kill_note(10, 36, 127);
                 midi.kill_note(10, 42, 127);
                 midi.play_note(10, 42, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][0], basslevel);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][1], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][0], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][1], basslevel);
                 midi.kill_note(10, 42, 127);
                 midi.play_note(10, 42, 127);
                 await this.delay1(speed);
@@ -1182,18 +1186,18 @@ let megaman2 = {
                 midi.play_note(10, 42, 127);
                 await this.delay1(speed);
                 midi.kill_note(10, 42, 127);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][1], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][1], basslevel);
 
                 midi.play_note(10, 36, 127);
                 midi.play_note(10, 42, 127);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][2], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][2], basslevel);
                 await this.delay1(speed);
                 midi.kill_note(10, 36, 127);
                 midi.kill_note(10, 42, 127);
                 midi.play_note(10, 42, 127);
                 await this.delay1(speed);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][2], basslevel);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][3], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][2], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][3], basslevel);
                 midi.kill_note(10, 42, 127);
                 midi.play_note(10, 42, 127);
                 await this.delay1(speed);
@@ -1201,11 +1205,11 @@ let megaman2 = {
                 midi.play_note(10, 42, 127);
                 await this.delay1(speed);
                 midi.kill_note(10, 42, 127);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][3], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][3], basslevel);
 
                 midi.play_note(10, 36, 127);
                 midi.play_note(10, 42, 127);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][4], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][4], basslevel);
                 if (measure == 29)
                     midi.play_note(this.drumchannel, midi.D2, 127);
                 await this.delay1(speed);
@@ -1219,8 +1223,8 @@ let megaman2 = {
                 await this.delay1(speed);
                 if (measure == 29)
                     midi.kill_note(this.drumchannel, midi.C2, 127);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][4], basslevel);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][5], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][4], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][5], basslevel);
                 midi.kill_note(10, 42, 127);
                 midi.play_note(10, 42, 127);
                 if (measure == 29)
@@ -1236,11 +1240,11 @@ let megaman2 = {
                 if (measure == 29)
                     midi.kill_note(this.drumchannel, midi.A1, 127);
                 midi.kill_note(10, 42, 127);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][5], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][5], basslevel);
 
                 midi.play_note(10, 36, 127);
                 midi.play_note(10, 42, 127);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][6], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][6], basslevel);
                 if (measure == 29)
                     midi.play_note(this.drumchannel, midi.C2, 127);
                 await this.delay1(speed);
@@ -1254,8 +1258,8 @@ let megaman2 = {
                 await this.delay1(speed);
                 if (measure == 29)
                     midi.kill_note(this.drumchannel, midi.B1, 127);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][6], basslevel);
-                midi.play_note(this.basschannel, this.drumbassnotes[measure][7], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][6], basslevel);
+                midi.play_note(this.synthBassChannel, this.drumbassnotes[measure][7], basslevel);
                 midi.kill_note(10, 42, 127);
                 midi.play_note(10, 42, 127);
                 if (measure == 29)
@@ -1273,7 +1277,7 @@ let megaman2 = {
                 if (measure == 29)
                     midi.kill_note(this.drumchannel, midi.G1, 127);
                 midi.kill_note(10, 42, 127);
-                midi.kill_note(this.basschannel, this.drumbassnotes[measure][7], basslevel);
+                midi.kill_note(this.synthBassChannel, this.drumbassnotes[measure][7], basslevel);
 
 
                 if ((measure == 22) || (measure == 30))
@@ -1287,120 +1291,120 @@ let megaman2 = {
 
         for (index = 0; index < 1; index++) {
             midi.kill_note(10, 54, 127);
-            lights.change_light_level(9,0);
-            lights.change_light_level(1,50);
-            lights.change_light_level(2,75);
-            lights.change_light_level(3,25);
-            lights.change_light_level(4,50);
+            lights.change_light_level(9, 0);
+            lights.change_light_level(1, 50);
+            lights.change_light_level(2, 75);
+            lights.change_light_level(3, 25);
+            lights.change_light_level(4, 50);
             //measure one of end
             midi.play_note(10, midi.D2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.G1, 127);
+            midi.play_note(this.synthBassChannel, midi.G1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.D2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.G1, 127);
+            midi.kill_note(this.synthBassChannel, midi.G1, 127);
             midi.play_note(10, midi.C2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.G1, 127);
+            midi.play_note(this.synthBassChannel, midi.G1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.C2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.G1, 127);
+            midi.kill_note(this.synthBassChannel, midi.G1, 127);
             midi.play_note(10, midi.B2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.A1, 127);
+            midi.play_note(this.synthBassChannel, midi.A1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.B2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.A1, 127);
+            midi.kill_note(this.synthBassChannel, midi.A1, 127);
             midi.play_note(10, midi.A2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.C2, 127);
+            midi.play_note(this.synthBassChannel, midi.C2, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.A2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.C2, 127);
+            midi.kill_note(this.synthBassChannel, midi.C2, 127);
             await this.delay1(speed);
 
             midi.play_note(10, midi.C2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.G1, 127);
+            midi.play_note(this.synthBassChannel, midi.G1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.C2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.G1, 127);
+            midi.kill_note(this.synthBassChannel, midi.G1, 127);
             midi.play_note(10, midi.B2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.A1, 127);
+            midi.play_note(this.synthBassChannel, midi.A1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.B2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.A1, 127);
+            midi.kill_note(this.synthBassChannel, midi.A1, 127);
             midi.play_note(10, midi.A2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.C2, 127);
+            midi.play_note(this.synthBassChannel, midi.C2, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.A2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.C2, 127);
+            midi.kill_note(this.synthBassChannel, midi.C2, 127);
             await this.delay1(speed);
 
             midi.play_note(10, midi.C2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.G1, 127);
+            midi.play_note(this.synthBassChannel, midi.G1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.C2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.G1, 127);
+            midi.kill_note(this.synthBassChannel, midi.G1, 127);
             midi.play_note(10, midi.B2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.A1, 127);
+            midi.play_note(this.synthBassChannel, midi.A1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.B2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.A1, 127);
+            midi.kill_note(this.synthBassChannel, midi.A1, 127);
             midi.play_note(10, midi.A2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.C2, 127);
+            midi.play_note(this.synthBassChannel, midi.C2, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.A2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.C2, 127);
+            midi.kill_note(this.synthBassChannel, midi.C2, 127);
             await this.delay1(speed);
 
             midi.play_note(10, midi.C2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.G2, 127);
+            midi.play_note(this.synthBassChannel, midi.G2, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.C2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.G2, 127);
+            midi.kill_note(this.synthBassChannel, midi.G2, 127);
             midi.play_note(10, midi.B2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.A2, 127);
+            midi.play_note(this.synthBassChannel, midi.A2, 127);
             await this.delay1(speed);
             await this.delay1(speed);
             midi.kill_note(10, midi.B2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.A2, 127);
+            midi.kill_note(this.synthBassChannel, midi.A2, 127);
             midi.play_note(10, midi.A2, 127);
             midi.play_note(10, midi.D1, 127);
-            midi.play_note(this.basschannel, midi.C3, 127);
+            midi.play_note(this.synthBassChannel, midi.C3, 127);
             midi.play_note(10, midi.CS1, 127);
             await this.delay1(speed);
             await this.delay1(speed);
@@ -1408,7 +1412,7 @@ let megaman2 = {
             midi.kill_note(10, midi.CS1, 127);
             midi.kill_note(10, midi.A2, 127);
             midi.kill_note(10, midi.D1, 127);
-            midi.kill_note(this.basschannel, midi.C3, 127);
+            midi.kill_note(this.synthBassChannel, midi.C3, 127);
             await this.delay1(speed);
 
         }
@@ -1433,11 +1437,11 @@ let megaman2 = {
 
     dostuff: function(ev) {
         let chords = [];
-        chords[keyboard.INDEX_1] = [midi.C4,  67, midi.DS3, midi.C3];
-        chords[keyboard.INDEX_2] = [midi.AS3, 65, 62,       midi.AS3];
-        chords[keyboard.INDEX_3] = [midi.GS3, 63, 60,       midi.GS2];
-        chords[keyboard.INDEX_4] = [midi.G3,  62, 59,       midi.G2];
-        chords[keyboard.INDEX_5] = [midi.C4,  67, midi.E3,  midi.C3];
+        chords[keyboard.INDEX_1] = [midi.C4, 67, midi.DS3, midi.C3];
+        chords[keyboard.INDEX_2] = [midi.AS3, 65, 62, midi.AS3];
+        chords[keyboard.INDEX_3] = [midi.GS3, 63, 60, midi.GS2];
+        chords[keyboard.INDEX_4] = [midi.G3, 62, 59, midi.G2];
+        chords[keyboard.INDEX_5] = [midi.C4, 67, midi.E3, midi.C3];
 
         if (ev.type == "keydown") {
             chords.forEach(function(item, index) {
@@ -1505,10 +1509,10 @@ let megaman2 = {
         midi.kill_note(10, 38, 127);
 
         measure = -1;
-        lights.change_light_level(1,50);
-        lights.change_light_level(2,75);
-        lights.change_light_level(3,25);
-        lights.change_light_level(4,50);
+        lights.change_light_level(1, 50);
+        lights.change_light_level(2, 75);
+        lights.change_light_level(3, 25);
+        lights.change_light_level(4, 50);
 
         while (1) {
 
@@ -1525,59 +1529,59 @@ let megaman2 = {
             this.cout("<br/>Measure " + ((++measure) + 1));
             midi.play_note(10, 36, 127);
 
-            midi.play_note(this.basschannel, this.bassnotes[measure][0], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][0], 127);
             await this.delay1(speed);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][0], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][0], 127);
 
-            midi.play_note(this.basschannel, this.bassnotes[measure][1], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][1], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][1], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][2], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][1], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][2], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][2], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][3], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][2], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][3], 127);
             midi.kill_note(10, 36, 127);
             midi.play_note(10, 38, 127);
             await this.delay1(speed);
             await this.delay1(speed);
 
-            midi.kill_note(this.basschannel, this.bassnotes[measure][3], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][4], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][3], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][4], 127);
 
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][4], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][5], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][4], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][5], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][5], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][6], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][5], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][6], 127);
 
             midi.kill_note(10, 38, 127);
             midi.play_note(10, 36, 127);
             await this.delay1(speed);
             await this.delay1(speed);
 
-            midi.kill_note(this.basschannel, this.bassnotes[measure][6], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][7], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][6], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][7], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][7], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][8], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][7], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][8], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][8], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][9], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][8], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][9], 127);
 
             midi.kill_note(10, 36, 127);
             midi.play_note(10, 38, 127);
 
             await this.delay1(speed);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][9], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][10], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][9], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][10], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][10], 127);
-            midi.play_note(this.basschannel, this.bassnotes[measure][11], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][10], 127);
+            midi.play_note(this.synthBassChannel, this.bassnotes[measure][11], 127);
             await this.delay1(speed);
-            midi.kill_note(this.basschannel, this.bassnotes[measure][11], 127);
+            midi.kill_note(this.synthBassChannel, this.bassnotes[measure][11], 127);
             midi.kill_note(10, 38, 127);
 
             if (this.state == "done_wily") {
@@ -1602,14 +1606,14 @@ let megaman2 = {
         mapping[keyboard.INDEX_UP] = midi.A4;
         mapping[keyboard.INDEX_SPACE] = midi.E4;
 
-        if (ev.type == "keydown") {                  
+        if (ev.type == "keydown") {
             mapping.forEach(function(item, index) {
                 if ((base.notes[index] == 0) && (ev.keyCode == index)) {
                     base.notes[index] = 1;
                     midi.play_note(base.counterchannel, item, 127);
                 }
             });
-        } else if (ev.type == "keyup") {            
+        } else if (ev.type == "keyup") {
             mapping.forEach(function(item, index) {
                 if ((base.notes[index] == 1) && (ev.keyCode == index)) {
                     base.notes[index] = 0;

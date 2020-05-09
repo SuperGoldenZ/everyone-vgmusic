@@ -153,8 +153,11 @@ let midi = {
             return;
         }
         channel--;
-        if (this.midiOut != null) {
-            this.midiOut.send([0xC0 + channel, programNumber - 1]);
+        if (this.midiOut != null) {            
+            let message = [];
+            message[0] = 0xC0 + channel;
+            message[1] = programNumber - 1;            
+            this.midiOut.send(message);
         }
     },
 
