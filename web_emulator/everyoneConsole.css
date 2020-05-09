@@ -38,13 +38,13 @@ body {
 	min-width: 60em;
 	min-height: 25em;		
 	margin-left: 40em;
-	margin-right: auto;
+	margin-right: auto;    
 }
 
-.score {
-	background-image: url("./megaman2_intro_bass_notes.jpg");
+.score {	
 	background-size: contain;
 	background-repeat: no-repeat;	
+  
 	min-width: 707px;
 	min-height: 399px;
 	position: fixed;
@@ -53,41 +53,45 @@ body {
 	display: none;
 }
 
-.redLight {  
-  border-radius:50%;
-  background:rgba(216,146,120,1);
+.light {
+  width:500px;
+  height:500px;
+  line-height:100px;
+  mix-blend-mode: lighten;
+  margin-left: -450px;
   color:white;
-  width:100px;
-  height:100px;
   text-align:center;
-  line-height:100px;  
+  
   float: left;
-  margin-top: 10em;
-  opacity: 0;
+  /*margin-top: 10em;*/
+  opacity: 0.9;
+  border-radius:50%;  
+}
+
+.redLight {  
+  background: rgb(216,146,120);
+  background: radial-gradient(circle, rgba(234,255,206,0.80) 3%, rgba(216,146,120,0.8) 16%, rgba(150,45,25,0.28895308123249297) 95%);
+  margin-left: -100px;
 }
 
 .greenLight {
-  border-radius:50%;
-  background:rgba(146,219,190,1);
-  color:white;
-  width:100px;
-  height:100px;
-  text-align:center;
-  line-height:100px;
-  float: left;
-  margin-top: 10em;
-  opacity: 0;
+  background: rgb(234,255,206);
+  background: radial-gradient(circle, rgba(234,255,206,1) 3%, rgba(5,255,88,1) 16%, rgba(0,255,76,0.28895308123249297) 95%);
 }
 
 .blueLight {
-  border-radius:50%;
-  background:rgba(88,119,225,1);
-  color:white;
-  width:100px;
-  height:100px;
-  text-align:center;
-  line-height:100px;  
-  float: left;
-  margin-top: 10em;
-  opacity: 0;
+  background: rgb(206,234,255);
+  background: radial-gradient(circle, rgba(206,234,255,1) 3%, rgba(78,237,249,1) 16%, rgba(0,125,255,0.28895308123249297) 47%);
+}
+
+.whiteLight {
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(206,234,255,1) 2%, rgba(175,175,175,0.75) 16%, rgba(206,234,255,0.28895308123249297) 47%);
+}
+
+.stageShadow {
+  min-width: 60em;
+  min-height: 25em;   
+  background:rgba(0,0,0,1);
+  opacity: 0.75;
 }

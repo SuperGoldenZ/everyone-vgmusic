@@ -220,6 +220,10 @@ let megaman2 = {
         this.state = "done";
         $(".score").fadeOut(500);
         if (this.onDone != null) {
+            lights.change_light_level(1,127);
+            lights.change_light_level(2,127);
+            lights.change_light_level(3,127);
+            lights.change_light_level(4,127);
             this.onDone();
         }
     },
@@ -283,8 +287,8 @@ let megaman2 = {
     //***
     go: async function() {
         let = nspeed = 135;
-        this.clrscr();
-
+        this.clrscr();        
+        $(".score").css("background-image", "url(\"./megaman2_intro_bass_notes.jpg\")");
         // change_program(2,9,0); //tinestring
         // change_effects_channel(8);
         lights.all_lights_off(0);
@@ -758,7 +762,7 @@ let megaman2 = {
         for (index = 0; index < 127; index++)
             this.notes[index] = 0;
 
-        let count = 0;
+        let count = 0;        
         $(".score").css("background-image", "url(\"./megaman2_intro_chords.jpg\")");
 
         lights.change_light_level(9,127);
