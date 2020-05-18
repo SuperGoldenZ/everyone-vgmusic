@@ -5,6 +5,7 @@ let lights = {
     GREEN_CHANNEL: 4,
     INDIVIDUAL_FLASH: 9,
     state: null,
+    flashSpeed: 500,
 
     change_light_level: function(channel, level, updateState = true) {
         var opacity = (level / 127.0) * 0.75;
@@ -36,11 +37,9 @@ let lights = {
                 this.state = "static";
             } else {
                 this.state = "individual_flash";
-                setTimeout(lights.individual_flash, 500);
+                setTimeout(lights.individual_flash, lights.flashSpeed);
             }
-        }
-
-        console.log("change_light_level: " + channel + " " + level + " " + updateState + " " + lights.state);
+        }        
     },
 
     all_lights_off: function(updateState = true) {
@@ -50,13 +49,12 @@ let lights = {
         this.change_light_level(lights.WHITE_CHANNEL, 0, updateState);
     },
 
-    individual_flash: function() {
-        console.log("individual_flash: " + lights.state);
+    individual_flash: function() {        
         if (lights.state != "static") {
             lights.all_lights_off(false);
             let channel = Math.floor(Math.random() * 4) + 1;
             lights.change_light_level(channel, 127, false);
-            setTimeout(lights.individual_flash, 500);
+            setTimeout(lights.individual_flash, lights.flashSpeed);
         }
     }
 };

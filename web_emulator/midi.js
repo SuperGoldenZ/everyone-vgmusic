@@ -91,9 +91,16 @@ let midi = {
     C7: 108,
 
     midiOut: null,
-    play_note: function(channel, note, velocity) {        
+
+    PAN_CENTER: 0x40,
+    PAN_LEFT: 0x40-32,
+    PAN_RIGHT: 0x40+32,
+    PAN_HARD_LEFT: 0x00,
+    PAN_HARD_RIGHT: 0x7F,
+
+    play_note: function(channel, note, velocity) {
         //console.log("play note: " + channel + ", " + note + ", " + velocity);
-        if (note == 0) return 0;        
+        if (note == 0) return 0;
         channel--;
         if ((channel >= 0) && (channel <= 15)) {
 
@@ -108,13 +115,13 @@ let midi = {
             }
             //console.log(message);
 
-            if (typeof this.midiOut.WebMIDI !== "undefined") {                                
-                MIDI.noteOn(channel+1, note, velocity);                
+            if (typeof this.midiOut.WebMIDI !== "undefined") {
+                MIDI.noteOn(channel + 1, note, velocity);
                 //this.midiOut.send(message);
             } else {
-                this.midiOut.send(message);    
+                this.midiOut.send(message);
             }
-            
+
         }
         return 1;
     },
@@ -136,27 +143,26 @@ let midi = {
                 return -1;
             }
 
-            if (typeof this.midiOut.WebMIDI !== "undefined") {                                
-                MIDI.noteOff(channel+1, note);                                
+            if (typeof this.midiOut.WebMIDI !== "undefined") {
+                MIDI.noteOff(channel + 1, note);
             } else {
                 this.midiOut.send(message);
             }
 
         }
         return 1;
-    },    
+    },
 
     program_change: function(channel, programNumber) {
-        if (typeof this.midiOut.programChange !== "undefined")  
-        {
-            MIDI.programChange(channel, programNumber-1 );
+        if (typeof this.midiOut.programChange !== "undefined") {
+            MIDI.programChange(channel, programNumber - 1);
             return;
         }
         channel--;
-        if (this.midiOut != null) {            
+        if (this.midiOut != null) {
             let message = [];
             message[0] = 0xC0 + channel;
-            message[1] = programNumber - 1;            
+            message[1] = programNumber - 1;
             this.midiOut.send(message);
         }
     },
@@ -167,7 +173,7 @@ let midi = {
         if (newvolume < 0)
             return;
         channel--;
-        let message= [];
+        let message = [];
         message[0] = 0xF0;
         message[1] = 0x00;
         message[2] = 0x00;
@@ -181,6 +187,18 @@ let midi = {
         message[9] = newvolume; //vvvvvvvv 
         message[10] = 0; //vvvvvvvv
         message[11] = 0xF7;
+        if (this.midiOut != null) {
+            this.midiOut.send(message);
+        }
+    },
+
+    change_pan: function(channel, newPan) {
+        channel--;
+        let message = [];
+        message[0] = 0xB0;
+        message[0] += channel;
+        message[1] = 0x0A;
+        message[2] = newPan;
         if (this.midiOut != null) {
             this.midiOut.send(message);
         }

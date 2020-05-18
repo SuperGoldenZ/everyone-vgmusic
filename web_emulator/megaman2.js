@@ -159,7 +159,7 @@ let megaman2 = {
             this.drumbassnotes[37][index] = midi.C2 - 12;
 
         $(".score").fadeIn(500);
-        $(".everyoneConsole").css("flex-direction", "row");
+        //$(".everyoneConsole").css("flex-direction", "row");
         this.generalMidiSetup();
         this.menu();
     },
@@ -170,8 +170,12 @@ let megaman2 = {
         midi.program_change(megaman2.basschannel, 34);
         midi.program_change(megaman2.synthBassChannel, 39);
         midi.program_change(megaman2.flutechannel, 74);
+        
         midi.program_change(megaman2.chordchannel, 51);
+        midi.change_pan(megaman2.chordchannel, midi.PAN_LEFT);
+
         midi.program_change(megaman2.counterchannel, 81);
+
         midi.program_change(megaman2.drumchannel, 115);
     },
 
@@ -190,8 +194,8 @@ let megaman2 = {
         if (this.state == "menu") {
             if (ev.keyCode == keyboard.INDEX_1) {
                 this.go(92);
-                //this.drums(92);
-                this.state = "intro";
+                //ithis.drums(92);
+                //this.state = "intro";
                 return;
             } else if (ev.keyCode == keyboard.INDEX_3) {
                 this.wilys_castle(85);
@@ -303,7 +307,16 @@ let megaman2 = {
         this.cout("Playing Mega Man 2 intro...");
         let flutelevel = 127;
 
+        for (var i = 0; i < 4; i++) {
+            midi.play_note(this.drumchannel, midi.D2, flutelevel);
+            await this.delay2(nspeed*4);                    
+            midi.kill_note(this.drumchannel, midi.D2, flutelevel);            
+        }
+
         this.cout("<br/>Measure " + measure++);
+        playback();
+        moveToMeasure(measure);
+
         midi.play_note(this.flutechannel, 82, flutelevel);
 
         this.cout(" 1 ");
@@ -331,6 +344,7 @@ let megaman2 = {
 
         //Measure 2   
         this.cout("<br/>Measure " + measure++);
+        moveToMeasure(measure);
         midi.play_note(this.flutechannel, 83, flutelevel);
         this.cout(" 1 ");
         await this.delay2(nspeed);
@@ -359,6 +373,7 @@ let megaman2 = {
 
         //Measure 3   
         this.cout("<br/>Measure " + measure++);
+        //moveToMeasure(measure);
         midi.play_note(this.flutechannel, 82, flutelevel);
         this.cout(" 1 ");
         await this.delay2(nspeed);
@@ -385,6 +400,7 @@ let megaman2 = {
 
         //Measure 4   
         this.cout("<br/>Measure " + measure++);
+        //moveToMeasure(measure);
         midi.play_note(this.flutechannel, 83, flutelevel);
         this.cout(" 1 ");
         await this.delay2(nspeed);
@@ -413,6 +429,7 @@ let megaman2 = {
 
         //Measure 5   
         this.cout("<br/>Measure " + measure++);
+        //moveToMeasure(measure);
         midi.play_note(this.flutechannel, 82, flutelevel);
         this.cout(" 1 ");
         await this.delay2(nspeed);
@@ -769,6 +786,7 @@ let megaman2 = {
         let count = 0;
         $(".score").css("background-image", "url(\"./megaman2_intro_chords.jpg\")");
 
+        lights.flashSpeed = speed*8;
         lights.change_light_level(9, 127);
 
         while (1) {
