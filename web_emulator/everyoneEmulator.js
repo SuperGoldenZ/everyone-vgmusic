@@ -1,6 +1,6 @@
 var cursor;
 var osmd;
-var oldX;
+var oldX = 0;
 
 $(document).ready(function() {
     everyoneConsole = $('#console').everyoneConsole([megaman2]);
@@ -34,13 +34,12 @@ $(document).ready(function() {
         console.log("score rendering");
         osmd.render();
         console.log("score rendered");
-        $(".score").fadeIn(500);
+        //$(".score").fadeIn(500);
         //moveScore();
 
-        cursor = osmd.cursor;
-        cursor.show();
-        console.log(cursor);
-        oldX = cursor.cursorElement.x;
+//        cursor = osmd.cursor;
+  //      cursor.show();        
+        //oldX = cursor.cursorElement.x;
         //cursor.next();
 
         //setTimeout(moveScore, 500);
@@ -59,32 +58,36 @@ function onMidiFailure() {
 
 //var firstPlayback = true;
 
-function playback()
-{        
-    
-//    if (firstPlayback === false ) {
-        cursor.next();        
+function playback(goNext = true) {
+
+    //    if (firstPlayback === false ) {
+    if (goNext === true) {
+        cursor.next();
+    }
 
     var notes = cursor.NotesUnderCursor();
     console.log(notes);
 
-    var delay = notes[0].length.realValue * 135 * 16;
+    var delay = notes[0].length.realValue * activeSong.speed * 16;
     if (delay == 0) {
-        delay = 135 * 16;        
+        delay = 135 * 16;
     }
 
-        var diff = oldX - cursor.cursorElement.x;
-        $(".score").css({
-           left: $(".score").position().left + diff + "px"
-        });        
+    if (oldX === 0) {
+        oldX = cursor.cursorElement.x;
+    }
+
+    var diff = oldX - cursor.cursorElement.x;
+    $(".score").css({
+        left: $(".score").position().left + diff + "px"
+    });
     //}
-  
+
     //firstPlayback = false;
     setTimeout(playback, delay);
 }
 
-function moveToMeasure(measureNumber)
-{
+function moveToMeasure(measureNumber) {
     return;
     // for (var i = 0 ; i < osmd.graphic.measureList.length; i++) {
     //     //osmd.graphic.measureList[0][0].staffEntries[0].graphicalVoiceEntries[0].notes[0].sourceNote.noteheadColor = "#FF0000" // red rest note
@@ -94,37 +97,39 @@ function moveToMeasure(measureNumber)
     //             osmd.graphic.measureList[i][0].staffEntries[0].graphicalVoiceEntries[0].notes[j].sourceNote.noteheadColor = "#FF0000" // red rest note
     //             console.log("set color");
     //     }
-        
-    // }
-    
-    //console.log(osmd.graphic.measureList[0][0].graphicalVoiceEntries[0].notes);
-   while (cursor.iterator.currentMeasure.measureNumber < measureNumber-2 ) {
-    var notes = cursor.NotesUnderCursor();
-    for (var i = 0; i < notes.length; i++) {
-    //     notes[i].noteheadColor = "#FF0000";
-    //     notes[i].stemColor = "#FF0000";
-         console.log(notes[i]);
-    }
-    //osmd.updateGraphic();
-    
-      cursor.next();   
-      var diff = oldX - cursor.cursorElement.x;
-    $(".score").css({
-       left: $(".score").position().left + diff + "px"
-    });
 
-   }
+    // }
+
+    //console.log(osmd.graphic.measureList[0][0].graphicalVoiceEntries[0].notes);
+    while (cursor.iterator.currentMeasure.measureNumber < measureNumber - 2) {
+        var notes = cursor.NotesUnderCursor();
+        for (var i = 0; i < notes.length; i++) {
+            //     notes[i].noteheadColor = "#FF0000";
+            //     notes[i].stemColor = "#FF0000";
+            console.log(notes[i]);
+        }
+        //osmd.updateGraphic();
+
+        cursor.next();
+        var diff = oldX - cursor.cursorElement.x;
+        $(".score").css({
+            left: $(".score").position().left + diff + "px"
+        });
+
+    }
 }
 
 //measure number
-function moveScore()
-{
+function moveScore() {
+    if (oldX === 0) {
+        oldX = cursor.cursorElement.x;
+    }
     cursor.next();
     console.log(cursor.iterator.currentMeasure.measureNumber);
     var diff = oldX - cursor.cursorElement.x;
     //console.log();
     $(".score").css({
-       left: $(".score").position().left + diff + "px"
+        left: $(".score").position().left + diff + "px"
     });
     //console.log("moving score");
     setTimeout(moveScore, 500);

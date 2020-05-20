@@ -1,3 +1,5 @@
+let activeSong = null;
+
 (function($) {
     $.fn.everyoneConsole = function(songs) {
         return this.each(function() {
@@ -52,6 +54,7 @@
                     for (var i = 0; i < base.songs.length; i++) {
                         if (command == base.songs[i].filename) {
                             base.activeSong = base.songs[i];
+                            activeSong = base.songs[i];
                             base.songs[i].main();
                             base.activeSong.onDone = function() {
                                 base.activeSong = null;
