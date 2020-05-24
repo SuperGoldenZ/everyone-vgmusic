@@ -9,28 +9,27 @@
     <script src="keyboard.js"></script>
     <script src="megaman2.js"></script>
     <script src="js/EveryoneEasyKeysProgram.js"></script>
-    <script src="js/Act.js"></script>    
+    <script src="js/Act.js"></script>
+    <script src="js/Bubble.js"></script>
+    <script src="js/MegaMan3.js"></script>
     <script src="lights.js"></script>
     <script src="midi-js-gm1-percussion/steel_drums-mp3.js"></script>
     <script src="everyoneConsole.js"></script>
     <script src="everyoneEmulator.js"></script>
-
-    
     <script src="opensheetmusicdisplay.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="everyoneConsole.css">
 </head>
 
 <body>
     <div class="stage">
         <div class="stageShadow">
-            <div class="leftLights" style = "margin-right: 250px;float: left;">
+            <div class="leftLights" style="margin-right: 250px;float: left;">
                 <div class="redLight light"></div>
                 <div class="whiteLight light"></div>
                 <div class="greenLight light"></div>
                 <div class="blueLight light"></div>
             </div>
-            <div class="rightLights" style = "margin-left: 250px;float: right;position: absolute;">
+            <div class="rightLights" style="margin-left: 250px;float: right;position: absolute;">
                 <div class="redLight light"></div>
                 <div class="whiteLight light"></div>
                 <div class="greenLight light"></div>
@@ -39,25 +38,21 @@
         </div>
     </div>
     <div class="midi_interfaces">
-        MIDI<br />
+        <br />
         <table>
             <tr>
                 <td>
+                    In
+                </td>
+                <td id="midi_inputs_td">
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
                     Out:
                 </td>
-                <td>
-                    <select id="midi_outputs">
-                        <option value="0">MIDI.js</option>
-                    </select><br />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    In:
-                </td>
-                <td>
-                    <select id="midi_inputs">
-                    </select>
+                <td id="midi_outputs_td">
                 </td>
             </tr>
         </table>
@@ -77,8 +72,8 @@
     <div id="console">
         C:\EVERYONE\>
     </div>
-    <div class = "scoreWrapper">
-        <div class="score" id = "score">
+    <div class="scoreWrapper">
+        <div class="score" id="score">
         </div>
     </div>
 </body>

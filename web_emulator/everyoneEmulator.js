@@ -3,7 +3,13 @@ var osmd;
 var oldX = 0;
 
 $(document).ready(function() {
-    everyoneConsole = $('#console').everyoneConsole([megaman2, new Act()]);
+    everyoneConsole = $('#console').everyoneConsole([
+        megaman2,
+        new MegaMan3(),
+        new Act(),
+        new Bubble()
+    ]);
+
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
     /*
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
@@ -37,8 +43,8 @@ $(document).ready(function() {
         //$(".score").fadeIn(500);
         //moveScore();
 
-//        cursor = osmd.cursor;
-  //      cursor.show();        
+        //        cursor = osmd.cursor;
+        //      cursor.show();        
         //oldX = cursor.cursorElement.x;
         //cursor.next();
 
@@ -67,7 +73,7 @@ function playback(goNext = true) {
 
     if (goNext === true) {
         cursor.next();
-    } 
+    }
 
     var notes = cursor.NotesUnderCursor();
     //console.log(notes);
@@ -163,7 +169,15 @@ function onMidiAccess(access) {
         if (out == null) {
             out = output;
         }
-        $('#midi_outputs').append("<option value = \"" + i++ + "\">" + output.name + "</option>");
+
+        //$('#midi_outputs').append("<option value = \"" + i++ + "\">" + output.name + "</option>");
+
+        $('#midi_outputs_td').append(
+            "<input type=\"radio\" id=\"" + output.name + 
+            "\" name=\"midi_outputs\" value=\"" + i++ + "\">"      );
+        $('#midi_outputs_td').append(
+            "<label for=\""+ output.name +"\">" + output.name + "</label><br>"
+        );        
     }
 
     i = 0;
@@ -171,7 +185,13 @@ function onMidiAccess(access) {
     for (var inputIt of access.inputs.values()) {
         midi_inputs.push(inputIt);
         //inputIt.onmidimessage = getMIDIMessage;
-        $('#midi_inputs').append("<option value = \"" + i++ + "\">" + output.name + "</option>");
+        $('#midi_inputs_td').append(
+            "<input type=\"radio\" id=\"" + output.name + 
+            "\" name=\"midi_inputs\" value=\"" + i++ + "\">"      );
+        $('#midi_inputs_td').append(
+            "<label for=\""+ output.name +"\">" + output.name + "</label><br>"
+        );        
+        //$('#midi_inputs').append("<option value = \"" + i++ + "\">" + output.name + "</option>");
     }
 
     access.onstatechange = function(e) {
@@ -179,7 +199,9 @@ function onMidiAccess(access) {
         console.log(e.port.name, e.port.manufacturer, e.port.state);
     };
 
-    $('#midi_outputs').change(onMidiOutputChange);
+
+$('input[type=radio][name=midi_outputs]').change(onMidiOutputChange);
+    //$('#midi_outputs').change(onMidiOutputChange);
     $('#midi_inputs').change(onMidiOutputChange);
 }
 
@@ -189,7 +211,10 @@ function onMidiInputChange(ev) {
 }
 
 function onMidiOutputChange(ev) {
-    var selectedMidiOutput = $("#midi_outputs").children("option:selected").val();
+    console.log("onMidiOutputChange");
+    console.log(ev);
+    
+    var selectedMidiOutput = ev.target.value;
     midi.midiOut = midi_outputs[selectedMidiOutput];
     console.log("set midi out " + selectedMidiOutput);
     console.log(midi_outputs);
