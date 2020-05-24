@@ -20,12 +20,31 @@
     background-image: url("./midi_logo.png");
     background-repeat: no-repeat;
     background-size: 50px;
-    background-position: 50% 0%;
+    background-position: 50% 10%;
     float: right;
     display: absolute;
     position: fixed;
     top: 1em;
     right: 1em;
+
+    border-radius: 25px;
+    border: 2px solid #b8bcc2;
+    padding: 5px; /*
+    width: 200px;
+    heght: 150px;    */
+}
+
+.Credits {
+    float: right;
+    display: absolute;
+    position: fixed;
+    top: 7em;
+    right: 1em;
+
+}
+
+.Credits a:visited {
+    color: #8a8a8a;
 }
 
 body {
@@ -109,3 +128,4 @@ body {
     background: rgba(0, 0, 0, 1);
     opacity: 0.75;
 }
+

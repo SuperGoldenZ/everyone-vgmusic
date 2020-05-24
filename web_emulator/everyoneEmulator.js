@@ -177,7 +177,7 @@ function onMidiAccess(access) {
             "\" name=\"midi_outputs\" value=\"" + i++ + "\">"      );
         $('#midi_outputs_td').append(
             "<label for=\""+ output.name +"\">" + output.name + "</label><br>"
-        );        
+        );
     }
 
     i = 0;
