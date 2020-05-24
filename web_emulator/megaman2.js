@@ -194,13 +194,27 @@ let megaman2 = {
 
         if (this.state == "menu") {
             if (ev.keyCode == keyboard.INDEX_1) {
-                this.go(92);
-                //ithis.drums(92);
+                //this.go(135);
+                this.drums(92);
                 //this.state = "intro";
                 return;
-            } else if (ev.keyCode == keyboard.INDEX_3) {
-                this.wilys_castle(85);
+            } else if (ev.keyCode == keyboard.INDEX_3) {                
                 this.state = "wily";
+
+                var loadPromise = osmd.load("./mm2_wily.musicxml");
+                loadPromise.then(function() {
+                    osmd.render();
+                    $(".score").css({
+                        left: "0px"
+                    });
+
+                    $(".score").fadeIn(500);
+                    cursor = osmd.cursor;
+                    
+                    console.log("Wily Castle Loaded");                    
+                    megaman2.wilys_castle(85);
+                    console.log("Wily Castle Loaded started");
+                });
                 return;
             }
         }
@@ -767,35 +781,42 @@ let megaman2 = {
         await this.delay2(this.speed * 16);
         midi.kill_note(this.flutechannel, midi.D5, flutelevel);
         await this.delay2(this.speed * 2);
+        stopPlayback = true;
 
         if (this.state != "done") {
             this.cout("<br/>LET GO");
+            $(".score").fadeOut(500);
             this.drums(92);
         } else {
             this.menu();
         }
     },
 
-    //DRUMS!   
-    drums: async function(speed) {
-        this.speed = speed;
-        this.state = "drums";
-        this.clrscr();
+    drumsLoop: async function(speed) {
+        this.speed = 92;
+        lights.flashSpeed = this.speed * 8;
+        lights.change_light_level(9, 127);
+        let count = 0;
         let basslevel = 127;
-        this.cout("Drum mode activated!");
-        this.cout("<br/>SPACE returns to Bass Blaster Mode!");
-
         let measure = 21; //old = 21
         for (index = 0; index < 127; index++)
             this.notes[index] = 0;
 
-        let count = 0;
-        $(".score").css("background-image", "url(\"./megaman2_intro_chords.jpg\")");
+        midi.play_note(this.flutechannel, midi.A5, 127);
 
-        lights.flashSpeed = this.speed * 8;
-        lights.change_light_level(9, 127);
+        for (var i = 0; i < 4; i++) {
+            midi.play_note(this.drumchannel, midi.D1, 127);
+            await this.delay2(this.speed * 4);
+            midi.kill_note(this.drumchannel, midi.D1, 127);
+        }
 
-        while (1) {
+        midi.kill_note(this.flutechannel, midi.A5, 127);
+
+        stopPlayback = false;
+        cursor.show();
+        playback(false);
+
+        while (1) {            
             if ((count == 1) && (measure == 35))
                 break;
 
@@ -1445,6 +1466,28 @@ let megaman2 = {
         //change_program(2,9,0);   
         this.menu();
     },
+
+    //DRUMS!   
+    drums: async function(speed) {
+        this.speed = speed;
+        this.state = "drums";
+        this.clrscr();        
+        this.cout("Drum mode activated!");
+        this.cout("<br/>SPACE returns to Bass Blaster Mode!");
+
+        var loadPromise = osmd.load("./mm2_chords.musicxml");
+        loadPromise.then(function() {
+            osmd.render();
+            $(".score").css({
+                left: "0px"
+            });
+
+            $(".score").fadeIn(500);
+            cursor = osmd.cursor;
+            
+            megaman2.drumsLoop(this.speed);
+        });
+    },
     //END DRUMS    
     delay2: function(ms) {
         if (this.state == "done") {
@@ -1494,7 +1537,6 @@ let megaman2 = {
         this.cout("Dr. Wily's castle!");
         this.cout("<br/>Press ESC to quit");
 
-        $(".score").css("background-image", "url(\"./megaman2_skull_castle_notes.jpg\")");
         let measure = -1;
 
         midi.change_volume(2, 99);
@@ -1538,6 +1580,11 @@ let megaman2 = {
         lights.change_light_level(2, 75);
         lights.change_light_level(3, 25);
         lights.change_light_level(4, 50);
+
+        cursor = osmd.cursor;
+        cursor.show();
+
+        playback(false);
 
         while (1) {
 

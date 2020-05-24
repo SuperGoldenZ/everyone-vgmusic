@@ -20,7 +20,7 @@ $(document).ready(function() {
         drawCredits: false,
         drawPartNames: false,
         drawTitle: false,
-        renderSingleHorizontalStaffline: true
+        renderSingleHorizontalStaffline: true,
         /*defaultColorNotehead: "#FFFFFF",
         defaultColorStem: "#FFFFFF",
         defaultColorRest: "#FFFFFF",
@@ -57,20 +57,33 @@ function onMidiFailure() {
 }
 
 //var firstPlayback = true;
+var stopPlayback = false;
 
 function playback(goNext = true) {
 
-    //    if (firstPlayback === false ) {
-    if (goNext === true) {
-        cursor.next();
+    if (stopPlayback === true) {
+        return;
     }
 
+    if (goNext === true) {
+        cursor.next();
+    } 
+
     var notes = cursor.NotesUnderCursor();
-    console.log(notes);
+    //console.log(notes);
+
+    if (typeof notes[0] === 'undefined') {
+        console.error("Note was undefined");
+        return;
+    }
 
     var delay = notes[0].length.realValue * activeSong.speed * 16;
+
+    console.log("delay = " + notes[0].length.realValue + " * " + activeSong.speed);
+
     if (delay == 0) {
         delay = 135 * 16;
+        console.log("delay was 0!")
     }
 
     if (oldX === 0) {
