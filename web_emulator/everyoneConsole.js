@@ -71,7 +71,10 @@ let activeSong = null;
                         $(".everyoneConsole").append("<br/>&nbsp;Directory of C:\\EVERYONE");
                         $(".everyoneConsole").append("<br/> ");
                         for (var i = 0; i < base.songs.length; i++) {
-                            $(".everyoneConsole").append("<br/>" + base.songs[i].filename);
+                            $(".everyoneConsole").append("<br/>" + base.songs[i].filename);                                                        
+                            for (var j = 0; j < 8-base.songs[i].filename.length; j++) {
+                                $(".everyoneConsole").append("&nbsp;");    
+                            }
                             $(".everyoneConsole").append("&nbsp;EXE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
                             $(".everyoneConsole").append(base.songs[i].filesize);
                             $(".everyoneConsole").append("&nbsp;&nbsp;09-28-2002&nbsp;&nbsp;8:00p");

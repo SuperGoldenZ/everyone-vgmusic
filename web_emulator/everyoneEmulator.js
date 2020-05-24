@@ -3,7 +3,7 @@ var osmd;
 var oldX = 0;
 
 $(document).ready(function() {
-    everyoneConsole = $('#console').everyoneConsole([megaman2]);
+    everyoneConsole = $('#console').everyoneConsole([megaman2, new Act()]);
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
     /*
     navigator.requestMIDIAccess().then(onMidiAccess, onMidiFailure);
