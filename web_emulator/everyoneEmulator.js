@@ -160,38 +160,58 @@ function onMidiAccess(access) {
     const outputs = access.outputs.values();
     var i = 1;
 
+    let interfaces = [];
+    interfaces["MIDI.js"] = {
+        "output" : MIDI
+    };
 
-    midi_outputs.push(MIDI);
-    out = midi_outputs[0];
-    midi.midiOut = out;
     for (var output of access.outputs.values()) {
-        midi_outputs.push(output);
-        if (out == null) {
-            out = output;
+        if (typeof interfaces[output.name] === 'undefined') {
+            interfaces[output.name] = {
+                "output": output                
+            };
         }
-
-        //$('#midi_outputs').append("<option value = \"" + i++ + "\">" + output.name + "</option>");
-
-        $('#midi_outputs_td').append(
-            "<input type=\"radio\" id=\"" + output.name + 
-            "\" name=\"midi_outputs\" value=\"" + i++ + "\">"      );
-        $('#midi_outputs_td').append(
-            "<label for=\""+ output.name +"\">" + output.name + "</label><br>"
-        );
     }
 
-    i = 0;
+    for (var input of access.inputs.values()) {
+        if (typeof interfaces[input.name] === 'undefined') {
+            interfaces[input.name] = {
+                "input": input                
+            };
+        } else {
+            interfaces[input.name].input = input;
+        }
+    }
 
-    for (var inputIt of access.inputs.values()) {
-        midi_inputs.push(inputIt);
-        //inputIt.onmidimessage = getMIDIMessage;
-        $('#midi_inputs_td').append(
-            "<input type=\"radio\" id=\"" + output.name + 
-            "\" name=\"midi_inputs\" value=\"" + i++ + "\">"      );
-        $('#midi_inputs_td').append(
-            "<label for=\""+ output.name +"\">" + output.name + "</label><br>"
-        );        
-        //$('#midi_inputs').append("<option value = \"" + i++ + "\">" + output.name + "</option>");
+    console.log("interfaces");
+    console.log(interfaces);
+    
+    let outIndex = 0;
+    let inIndex = 0;
+
+    for (var name in interfaces) {
+        if (name === 'last') continue;
+        if (name === 'clear') continue;
+        if (name === 'contains') continue;
+
+        $('#midi_interfaces_td').append("<label>" + name + "</label>");
+        $('#midi_interfaces_td').append("<br/>");
+
+        if (interfaces[name].output) {
+                $('#midi_outputs_td').append(
+            "<input type=\"radio\" id=\"" + output.name +
+            "\" name=\"midi_outputs\" value=\"" + outIndex++ + "\">");
+            midi_outputs.push(interfaces[name].output);
+        }
+        $("#midi_outputs_td").append("<br/>");
+
+        if (interfaces[name].input) {
+            $('#midi_inputs_td').append(
+                "<input type=\"radio\" id=\"" + input.name +
+                "\" name=\"midi_inputs\" value=\"" + inIndex++ + "\">");
+            midi_inputs.push(interfaces[name].input);
+        }
+        $("#midi_inputs_td").append("<br/>");
     }
 
     access.onstatechange = function(e) {
@@ -200,9 +220,12 @@ function onMidiAccess(access) {
     };
 
 
-$('input[type=radio][name=midi_outputs]').change(onMidiOutputChange);
+    $('input[type=radio][name=midi_outputs]').change(onMidiOutputChange);
     //$('#midi_outputs').change(onMidiOutputChange);
+
     $('#midi_inputs').change(onMidiOutputChange);
+
+
 }
 
 function onMidiInputChange(ev) {
@@ -213,11 +236,21 @@ function onMidiInputChange(ev) {
 function onMidiOutputChange(ev) {
     console.log("onMidiOutputChange");
     console.log(ev);
-    
+
+    if (typeof MIDI.send === "undefined") {
+        MIDI.loadPlugin({
+            instruments: ["acoustic_bass", "fretless_bass", "acoustic_grand_piano", "flute",
+                "lead_1_square", "synth_strings_1"
+            ],
+            soundfontUrl: "https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/",
+            onsuccess: function(ev) {
+                console.log("plugin loaded!!");
+            }
+        });
+    }
+
     var selectedMidiOutput = ev.target.value;
     midi.midiOut = midi_outputs[selectedMidiOutput];
     console.log("set midi out " + selectedMidiOutput);
     console.log(midi_outputs);
-
-    //megaman2.cleanBassChannel = 36;
 }
