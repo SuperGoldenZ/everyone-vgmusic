@@ -64,6 +64,7 @@
     position: fixed;
     top: 9em;
     right: 1em;
+    text-align: right;
 }
 
 .Credits a:visited {
